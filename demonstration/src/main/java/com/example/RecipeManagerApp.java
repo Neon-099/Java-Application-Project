@@ -71,6 +71,7 @@ public class RecipeManagerApp extends Application {
         primaryStage.show();
     }
     
+    //HEADER SECTION
     private HBox createHeader() {
         HBox header = new HBox();
         header.setPadding(new Insets(15, 25, 15, 25));
