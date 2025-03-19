@@ -43,6 +43,7 @@ public class RecipeManagerApp extends Application {
         setupMainUI(primaryStage);
     }
     
+    // MAIN UI SETUP
     private void setupMainUI(Stage primaryStage) {
         // Main container
         root = new BorderPane();
