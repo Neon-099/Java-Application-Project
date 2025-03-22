@@ -60,7 +60,7 @@ public class RecipeManagerApp extends Application {
         root.setBottom(footer);
         
         // Create the scene
-        Scene scene = new Scene(root, 1100, 700);
+        Scene scene = new Scene(root, 1220, 700);
         primaryStage.setTitle("Recipe Manager");
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -166,17 +166,12 @@ public class RecipeManagerApp extends Application {
         VBox beveragesSection = createCategorySection("Beverages");
         
         // Create FlowPane for each category to allow wrapping of cards
-        FlowPane mainDishesFlow = new FlowPane(20, 20);
-        FlowPane soupsFlow = new FlowPane(20, 20);
-        FlowPane dessertsFlow = new FlowPane(20, 20);
-        FlowPane beveragesFlow = new FlowPane(20, 20);
-        
-        // Set common properties for all FlowPanes
-        FlowPane[] flowPanes = {mainDishesFlow, soupsFlow, dessertsFlow, beveragesFlow};
-        for (FlowPane flowPane : flowPanes) {
-            flowPane.setPrefWrapLength(1000); // Adjust this value based on your window width
-            flowPane.setAlignment(Pos.TOP_LEFT);
-        }
+        // Adjust the spacing between cards (both horizontal and vertical)
+        double spacing = 15;
+        FlowPane mainDishesFlow = createFlowPane(spacing);
+        FlowPane soupsFlow = createFlowPane(spacing);
+        FlowPane dessertsFlow = createFlowPane(spacing);
+        FlowPane beveragesFlow = createFlowPane(spacing);
         
         // Add recipe cards from recipeData
         for (Recipe recipe : recipeData.values()) {
@@ -233,28 +228,22 @@ public class RecipeManagerApp extends Application {
     private VBox createRecipeCard(String recipeName, String time, String category) {
         VBox card = new VBox(5);
         card.setStyle("-fx-background-color: white; -fx-border-radius: 5; -fx-background-radius: 5; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 4, 0, 0, 2);");
-        card.setPrefWidth(300);
+        
+        // Adjust the card width here - you can change this value
+        card.setPrefWidth(150);
+        // You can also set a min and max width if needed
+        card.setMinWidth(300);
+        card.setMaxWidth(300);
         
         // Image container
-        ImageView imageView = new ImageView();
-        imageView.setFitWidth(300);
+        ImageView imageView = createRecipeImageView(recipeName);
+        
+        // Set the size of the image to match the card width
+        imageView.setFitWidth(1000);
+        // Adjust the image height - you can change this value
         imageView.setFitHeight(150);
         imageView.setPreserveRatio(true);
         imageView.setSmooth(true);
-        
-        // Try to load image from recipe data
-        Recipe recipe = recipeData.get(recipeName);
-        if (recipe != null && recipe.imageUrl != null) {
-            try {
-                Image image = new Image(recipe.imageUrl, true); // true enables background loading
-                imageView.setImage(image);
-            } catch (Exception e) {
-                // If image loading fails, use default placeholder
-                setDefaultImage(imageView);
-            }
-        } else {
-            setDefaultImage(imageView);
-        }
         
         // Recipe info
         VBox recipeInfo = new VBox(3);
@@ -286,24 +275,77 @@ public class RecipeManagerApp extends Application {
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
         
-        Button editButton = new Button("✏️ Edit");
-        editButton.setStyle("-fx-background-color: transparent; -fx-padding: 2 5;");
+
+        // Button editButton = new Button("✏️ Edit");
+        // editButton.setStyle("-fx-background-color: transparent; -fx-padding: 2 5;");
         
-        Button deleteButton = new Button("🗑️ Delete");  
-        deleteButton.setStyle("-fx-background-color: transparent; -fx-padding: 2 5;");
+        // Button deleteButton = new Button("🗑️ Delete");  
+        // deleteButton.setStyle("-fx-background-color: transparent; -fx-padding: 2 5;");
+        // actions.getChildren().addAll(viewButton, spacer, editButton, deleteButton);
         
-        actions.getChildren().addAll(viewButton, spacer, editButton, deleteButton);
-        
+        actions.getChildren().addAll(viewButton, spacer);
+
         // Add event handlers
         viewButton.setOnAction(event -> handleViewRecipe(recipeName));
-        editButton.setOnAction(event -> handleEditRecipe(recipeName));
-        deleteButton.setOnAction(event -> handleDeleteRecipe(recipeName));
+
+        // editButton.setOnAction(event -> handleEditRecipe(recipeName));
+        // deleteButton.setOnAction(event -> handleDeleteRecipe(recipeName));
         
         recipeInfo.getChildren().addAll(nameLabel, metaInfo, actions);
         card.getChildren().addAll(imageView, recipeInfo);
         
         card.setUserData(recipeName);
         return card;
+    }
+    
+    private FlowPane createFlowPane(double spacing) {
+        // You can adjust the spacing between cards here
+        FlowPane flowPane = new FlowPane(spacing, spacing);
+        // Adjust the wrapping width based on your window size
+        flowPane.setPrefWrapLength(1100);
+        flowPane.setAlignment(Pos.TOP_LEFT);
+        return flowPane;
+    }
+    
+    //IMAGES HANDLING
+    private ImageView createRecipeImageView(String recipeName) {
+        ImageView imageView = new ImageView();
+        imageView.setFitWidth(350);
+        imageView.setFitHeight(200);
+        imageView.setPreserveRatio(true);
+        imageView.setSmooth(true);
+
+        Recipe recipe = recipeData.get(recipeName);
+        if (recipe != null && recipe.imageUrl != null && !recipe.imageUrl.isEmpty()) {
+            try {
+                // Log the image URL
+                System.out.println("Loading image from URL: " + recipe.imageUrl);
+
+                String imageUrl = recipe.imageUrl;
+                
+                // Handle different types of paths
+                if (imageUrl.startsWith("http") || imageUrl.startsWith("https")) {
+                    // Direct URL - use as is
+                } else if (imageUrl.startsWith("/")) {
+                    // Absolute path from resources root
+                    imageUrl = getClass().getResource(imageUrl).toExternalForm();
+                } else {
+                    // Relative path - try to resolve from classpath
+                    imageUrl = getClass().getResource("/" + imageUrl).toExternalForm();
+                }
+                
+                System.out.println("Resolved image URL: " + imageUrl);
+                Image image = new Image(imageUrl, true);
+                imageView.setImage(image);
+            } catch (Exception e) {
+                System.out.println("Failed to load image for " + recipeName + ": " + e.getMessage());
+                setDefaultImage(imageView);
+            }
+        } else {
+            setDefaultImage(imageView);
+        }
+
+        return imageView;
     }
     
     // Helper method to set default image
@@ -476,18 +518,12 @@ public class RecipeManagerApp extends Application {
         VBox dessertsSection = createCategorySection("Desserts");
         VBox beveragesSection = createCategorySection("Beverages");
         
-        // Create FlowPane for each category
-        FlowPane mainDishesFlow = new FlowPane(20, 20);
-        FlowPane soupsFlow = new FlowPane(20, 20);
-        FlowPane dessertsFlow = new FlowPane(20, 20);
-        FlowPane beveragesFlow = new FlowPane(20, 20);
-        
-        // Set common properties for all FlowPanes
-        FlowPane[] flowPanes = {mainDishesFlow, soupsFlow, dessertsFlow, beveragesFlow};
-        for (FlowPane flowPane : flowPanes) {
-            flowPane.setPrefWrapLength(1000);
-            flowPane.setAlignment(Pos.TOP_LEFT);
-        }
+        // Create FlowPane for each category with adjusted spacing
+        double spacing = 15;
+        FlowPane mainDishesFlow = createFlowPane(spacing);
+        FlowPane soupsFlow = createFlowPane(spacing);
+        FlowPane dessertsFlow = createFlowPane(spacing);
+        FlowPane beveragesFlow = createFlowPane(spacing);
         
         // Sort recipes into categories
         for (Recipe recipe : recipesToShow.values()) {
@@ -648,102 +684,102 @@ public class RecipeManagerApp extends Application {
         dialog.showAndWait();
     }
     
-    private void handleEditRecipe(String recipeName) {
-        VBox recipeCard = findRecipeCard(recipeName);
-        if (recipeCard == null) return;
+    // private void handleEditRecipe(String recipeName) {
+    //     VBox recipeCard = findRecipeCard(recipeName);
+    //     if (recipeCard == null) return;
 
-        Recipe currentRecipe = recipeData.get(recipeName);
-        if (currentRecipe == null) return;
+    //     Recipe currentRecipe = recipeData.get(recipeName);
+    //     if (currentRecipe == null) return;
 
-        Dialog<Recipe> dialog = new Dialog<>();
-        dialog.setTitle("Edit Recipe");
-        dialog.setHeaderText(null);
+    //     Dialog<Recipe> dialog = new Dialog<>();
+    //     dialog.setTitle("Edit Recipe");
+    //     dialog.setHeaderText(null);
 
-        ButtonType saveButtonType = new ButtonType("Save", ButtonBar.ButtonData.OK_DONE);
-        dialog.getDialogPane().getButtonTypes().addAll(saveButtonType, ButtonType.CANCEL);
+    //     ButtonType saveButtonType = new ButtonType("Save", ButtonBar.ButtonData.OK_DONE);
+    //     dialog.getDialogPane().getButtonTypes().addAll(saveButtonType, ButtonType.CANCEL);
 
-        GridPane grid = new GridPane();
-        grid.setHgap(10);
-        grid.setVgap(10);
-        grid.setPadding(new Insets(20));
+    //     GridPane grid = new GridPane();
+    //     grid.setHgap(10);
+    //     grid.setVgap(10);
+    //     grid.setPadding(new Insets(20));
 
-        // Create and populate fields with current values
-        TextField nameField = new TextField(currentRecipe.name);
-        TextField timeField = new TextField(currentRecipe.time);
-        TextArea ingredientsArea = new TextArea(currentRecipe.ingredients);
-        TextArea instructionsArea = new TextArea(currentRecipe.instructions);
+    //     // Create and populate fields with current values
+    //     TextField nameField = new TextField(currentRecipe.name);
+    //     TextField timeField = new TextField(currentRecipe.time);
+    //     TextArea ingredientsArea = new TextArea(currentRecipe.ingredients);
+    //     TextArea instructionsArea = new TextArea(currentRecipe.instructions);
 
-        ingredientsArea.setPrefRowCount(4);
-        ingredientsArea.setWrapText(true);
-        instructionsArea.setPrefRowCount(4);
-        instructionsArea.setWrapText(true);
+    //     ingredientsArea.setPrefRowCount(4);
+    //     ingredientsArea.setWrapText(true);
+    //     instructionsArea.setPrefRowCount(4);
+    //     instructionsArea.setWrapText(true);
 
-        // Style headers
-        Label ingredientsHeader = new Label("Ingredients");
-        ingredientsHeader.setFont(Font.font("Arial", FontWeight.BOLD, 14));
-        Label instructionsHeader = new Label("Instructions");
-        instructionsHeader.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+    //     // Style headers
+    //     Label ingredientsHeader = new Label("Ingredients");
+    //     ingredientsHeader.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+    //     Label instructionsHeader = new Label("Instructions");
+    //     instructionsHeader.setFont(Font.font("Arial", FontWeight.BOLD, 14));
 
-        // Add all elements to grid
-        grid.add(new Label("Recipe Name:"), 0, 0);
-        grid.add(nameField, 1, 0);
-        grid.add(new Label("Cooking Time:"), 0, 1);
-        grid.add(timeField, 1, 1);
-        grid.add(ingredientsHeader, 0, 2, 2, 1);
-        grid.add(ingredientsArea, 0, 3, 2, 1);
-        grid.add(instructionsHeader, 0, 4, 2, 1);
-        grid.add(instructionsArea, 0, 5, 2, 1);
+    //     // Add all elements to grid
+    //     grid.add(new Label("Recipe Name:"), 0, 0);
+    //     grid.add(nameField, 1, 0);
+    //     grid.add(new Label("Cooking Time:"), 0, 1);
+    //     grid.add(timeField, 1, 1);
+    //     grid.add(ingredientsHeader, 0, 2, 2, 1);
+    //     grid.add(ingredientsArea, 0, 3, 2, 1);
+    //     grid.add(instructionsHeader, 0, 4, 2, 1);
+    //     grid.add(instructionsArea, 0, 5, 2, 1);
 
-        dialog.getDialogPane().setContent(grid);
-        dialog.getDialogPane().setPrefWidth(400);
+    //     dialog.getDialogPane().setContent(grid);
+    //     dialog.getDialogPane().setPrefWidth(400);
 
-        dialog.setResultConverter(dialogButton -> {
-            if (dialogButton == saveButtonType) {
-                return new Recipe(
-                    nameField.getText(),
-                    timeField.getText(),
-                    currentRecipe.category,
-                    ingredientsArea.getText(),
-                    instructionsArea.getText()
-                );
-            }
-            return null;
-        });
+    //     dialog.setResultConverter(dialogButton -> {
+    //         if (dialogButton == saveButtonType) {
+    //             return new Recipe(
+    //                 nameField.getText(),
+    //                 timeField.getText(),
+    //                 currentRecipe.category,
+    //                 ingredientsArea.getText(),
+    //                 instructionsArea.getText()
+    //             );
+    //         }
+    //         return null;
+    //     });
 
-        dialog.showAndWait().ifPresent(recipe -> {
-            // Update the recipe data
-            recipeData.put(recipe.name, recipe);
-            // Update the recipe card
-            updateRecipeCard(recipeCard, recipe);
-        });
-    }
+    //     dialog.showAndWait().ifPresent(recipe -> {
+    //         // Update the recipe data
+    //         recipeData.put(recipe.name, recipe);
+    //         // Update the recipe card
+    //         updateRecipeCard(recipeCard, recipe);
+    //     });
+    // }
     
-    private void handleDeleteRecipe(String recipeName) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Delete Recipe");
-        alert.setHeaderText("Delete " + recipeName);
-        alert.setContentText("Are you sure you want to delete this recipe?");
+    // private void handleDeleteRecipe(String recipeName) {
+    //     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+    //     alert.setTitle("Delete Recipe");
+    //     alert.setHeaderText("Delete " + recipeName);
+    //     alert.setContentText("Are you sure you want to delete this recipe?");
 
-        alert.showAndWait().ifPresent(result -> {
-            if (result == ButtonType.OK) {
-                // Remove the recipe from the data map
-                recipeData.remove(recipeName);
+    //     alert.showAndWait().ifPresent(result -> {
+    //         if (result == ButtonType.OK) {
+    //             // Remove the recipe from the data map
+    //             recipeData.remove(recipeName);
                 
-                // Find and remove the recipe card from UI
-                VBox recipeCard = findRecipeCard(recipeName);
-                if (recipeCard != null) {
-                    FlowPane flowPane = (FlowPane) recipeCard.getParent();
-                    flowPane.getChildren().remove(recipeCard);
+    //             // Find and remove the recipe card from UI
+    //             VBox recipeCard = findRecipeCard(recipeName);
+    //             if (recipeCard != null) {
+    //                 FlowPane flowPane = (FlowPane) recipeCard.getParent();
+    //                 flowPane.getChildren().remove(recipeCard);
                     
-                    // If flowPane is empty, remove the category section
-                    if (flowPane.getChildren().isEmpty()) {
-                        VBox categorySection = (VBox) flowPane.getParent();
-                        categorySection.getChildren().remove(flowPane);
-                    }
-                }
-            }
-        });
-    }
+    //                 // If flowPane is empty, remove the category section
+    //                 if (flowPane.getChildren().isEmpty()) {
+    //                     VBox categorySection = (VBox) flowPane.getParent();
+    //                     categorySection.getChildren().remove(flowPane);
+    //                 }
+    //             }
+    //         }
+    //     });
+    // }
     
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -788,21 +824,21 @@ public class RecipeManagerApp extends Application {
     }
 
 
-    private void updateRecipeCard(VBox recipeCard, Recipe recipe) {
-        VBox recipeInfo = (VBox) recipeCard.getChildren().get(1);
+    // private void updateRecipeCard(VBox recipeCard, Recipe recipe) {
+    //     VBox recipeInfo = (VBox) recipeCard.getChildren().get(1);
         
-        // Update name
-        Label nameLabel = (Label) recipeInfo.getChildren().get(0);
-        nameLabel.setText(recipe.name);
+    //     // Update name
+    //     Label nameLabel = (Label) recipeInfo.getChildren().get(0);
+    //     nameLabel.setText(recipe.name);
         
-        // Update time and category
-        HBox metaInfo = (HBox) recipeInfo.getChildren().get(1);
-        Label timeInfo = (Label) metaInfo.getChildren().get(0);
-        timeInfo.setText("🕒 " + recipe.time);
+    //     // Update time and category
+    //     HBox metaInfo = (HBox) recipeInfo.getChildren().get(1);
+    //     Label timeInfo = (Label) metaInfo.getChildren().get(0);
+    //     timeInfo.setText("🕒 " + recipe.time);
         
-        Label categoryInfo = (Label) metaInfo.getChildren().get(1);
-        categoryInfo.setText(getCategoryEmoji(recipe.category) + " " + recipe.category);
-    }
+    //     Label categoryInfo = (Label) metaInfo.getChildren().get(1);
+    //     categoryInfo.setText(getCategoryEmoji(recipe.category) + " " + recipe.category);
+    // }
 
     public static void main(String[] args) {
         launch(args);

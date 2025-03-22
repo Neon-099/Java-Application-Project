@@ -14,7 +14,7 @@ public class RecipeData {
             "🍽️ Main Dishes",
             "• 400g spaghetti\n• 4 eggs\n• 200g pancetta\n• 100g Pecorino Romano\n• 100g Parmigiano-Reggiano\n• Black pepper\n• Salt",
             "1. Cook pasta in salted water\n2. Fry pancetta until crispy\n3. Mix eggs, cheese, and pepper\n4. Combine hot pasta with egg mixture\n5. Add pancetta and serve immediately",
-            ""
+            "com/example/images/main/Chicken_adobo.jpg"
         ));
         
         recipes.put("Beef Caldereta", new Recipe(
@@ -23,7 +23,7 @@ public class RecipeData {
             "🍽️ Main Dishes",
             "• 4 chicken breasts\n• 2 tbsp olive oil\n• 2 cloves garlic\n• 1 tsp oregano\n• Salt and pepper",
             "1. Marinate chicken with oil and herbs\n2. Preheat grill\n3. Grill 6-7 minutes per side\n4. Let rest before serving",
-            ""
+            "com/example/images/main/beef-caldereta.jpg"
         ));
         
         recipes.put("Bicol Express", new Recipe(
@@ -32,7 +32,7 @@ public class RecipeData {
             "🍽️ Main Dishes",
             "• 500g beef strips\n• Mixed vegetables\n• Soy sauce\n• Ginger and garlic\n• Cooking oil",
             "1. Heat oil in wok\n2. Stir fry beef until browned\n3. Add vegetables\n4. Add sauce and seasonings\n5. Serve hot",
-            ""
+            "com/example/images/main/bicol-express.jpg"
         ));
         
         recipes.put("Laing", new Recipe(
@@ -41,7 +41,7 @@ public class RecipeData {
             "🍽️ Main Dishes",
             "• 4 salmon fillets\n• Lemon\n• Dill\n• Butter\n• Salt and pepper",
             "1. Preheat oven to 400°F\n2. Season salmon\n3. Add lemon and dill\n4. Bake for 12-15 minutes",
-            ""
+            "com/example/images/main/laing.jpg"
         ));
         
         recipes.put("Menudo", new Recipe(
@@ -50,7 +50,7 @@ public class RecipeData {
             "🍽️ Main Dishes",
             "• Lasagna noodles\n• Ricotta cheese\n• Mixed vegetables\n• Tomato sauce\n• Mozzarella",
             "1. Layer noodles and filling\n2. Add sauce and cheese\n3. Repeat layers\n4. Bake until bubbly",
-            ""
+            "com/example/images/main/menudo.jpg"
         ));
 
         recipes.put("Chicken Curry", new Recipe(
@@ -59,7 +59,7 @@ public class RecipeData {
             "🍽️ Main Dishes",
             "• 500g chicken\n• Curry powder\n• Coconut milk\n• Onions\n• Garlic\n• Ginger",
             "1. Sauté onions, garlic, ginger\n2. Add chicken and curry powder\n3. Pour in coconut milk\n4. Simmer until cooked",
-            ""
+            "com/example/images/main/chicken-curry.jpg"
         ));
 
         recipes.put("Monggo pork", new Recipe(
@@ -68,7 +68,7 @@ public class RecipeData {
             "🍽️ Main Dishes",
             "• Ground beef\n• Burger buns\n• Lettuce\n• Tomato\n• Cheese\n• Onion",
             "1. Form beef patties\n2. Grill until desired doneness\n3. Add cheese to melt\n4. Assemble with toppings",
-            ""
+            "com/example/images/main/monggo-pork.jpg"
         ));
 
         recipes.put("Sinigang pork", new Recipe(
@@ -77,7 +77,7 @@ public class RecipeData {
             "🍽️ Main Dishes",
             "• Shrimp\n• Garlic\n• White wine\n• Butter\n• Lemon\n• Parsley",
             "1. Sauté garlic in butter\n2. Add shrimp and cook\n3. Add wine and lemon\n4. Garnish with parsley",
-            ""
+            "com/example/images/main/sinigang-pork.jpg"
         ));
 
         recipes.put("Tinolang Chicken", new Recipe(
@@ -86,7 +86,7 @@ public class RecipeData {
             "🍽️ Main Dishes",
             "• Pork chops\n• Herbs\n• Garlic\n• Butter\n• Salt and pepper",
             "1. Season pork chops\n2. Heat pan with butter\n3. Cook 5-6 mins each side\n4. Rest before serving",
-            ""
+            "com/example/images/main/tinolang-chicken.jpg"
         ));
 
         recipes.put("Adobong pusit", new Recipe(
@@ -95,7 +95,7 @@ public class RecipeData {
             "🍽️ Main Dishes",
             "• Eggplant\n• Breadcrumbs\n• Marinara sauce\n• Mozzarella\n• Parmesan",
             "1. Bread eggplant slices\n2. Fry until golden\n3. Layer with sauce and cheese\n4. Bake until bubbly",
-            ""
+            "com/example/images/main/adobong-pusit.jpg"
         ));
 
 

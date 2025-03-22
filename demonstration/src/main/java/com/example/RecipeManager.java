@@ -39,7 +39,7 @@ public class RecipeManager extends Application {
         root.setCenter(scrollPane);
         
         // Create the scene
-        Scene scene = new Scene(root, 1100, 700);
+        Scene scene = new Scene(root, 1220, 700);
         primaryStage.setTitle("Recipe Manager");
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -125,8 +125,7 @@ public class RecipeManager extends Application {
         featuresSection.getChildren().addAll(
             featuresTitle,
             createFeatureItem("📚", "Recipe Collection", "Save and organize your favorite recipes in one place"),
-            createFeatureItem("🕒", "Meal Planning", "Plan your weekly meals with ease"),
-            createFeatureItem("🔄", "Share & Discover", "Connect with other food lovers")
+            createFeatureItem("🕒", "Meal Planning", "Plan your weekly meals with ease")
         );
         
         // Footer section with background
