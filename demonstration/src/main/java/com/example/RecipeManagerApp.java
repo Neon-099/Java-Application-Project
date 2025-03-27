@@ -18,7 +18,9 @@ import javafx.scene.control.ButtonBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.ArrayList;
 
 public class RecipeManagerApp extends Application {
 
@@ -30,6 +32,9 @@ public class RecipeManagerApp extends Application {
     
     // Add a Hashmap to store recipe data
     private Map<String, Recipe> recipeData = new HashMap<>();
+    
+    // Add this field at the top of the class with other fields
+    private Map<String, List<Recipe>> mealPlans = new HashMap<>();
     
     @Override
     public void start(Stage primaryStage) {
@@ -138,7 +143,27 @@ public class RecipeManagerApp extends Application {
         
         categoryButtons.getChildren().addAll(mainDishesBtn, soupsBtn, dessertsBtn, beveragesBtn);
         
-        sidebar.getChildren().addAll(categoriesLabel, categoryButtons);
+        // Add Meal Planning section
+        Label mealPlanLabel = new Label("Meal Planning");
+        mealPlanLabel.setFont(Font.font("Arial", FontWeight.BOLD, 16));
+        mealPlanLabel.setPadding(new Insets(20, 0, 10, 0));
+        
+        VBox mealPlanButtons = new VBox(5);
+        
+        Button mondayBtn = createMealPlanButton("Monday");
+        Button tuesdayBtn = createMealPlanButton("Tuesday");
+        Button wednesdayBtn = createMealPlanButton("Wednesday");
+        Button thursdayBtn = createMealPlanButton("Thursday");
+        Button fridayBtn = createMealPlanButton("Friday");
+        Button saturdayBtn = createMealPlanButton("Saturday");
+        Button sundayBtn = createMealPlanButton("Sunday");
+        
+        mealPlanButtons.getChildren().addAll(
+            mondayBtn, tuesdayBtn, wednesdayBtn, thursdayBtn,
+            fridayBtn, saturdayBtn, sundayBtn
+        );
+        
+        sidebar.getChildren().addAll(categoriesLabel, categoryButtons, mealPlanLabel, mealPlanButtons);
         
         return sidebar;
     }
@@ -151,6 +176,18 @@ public class RecipeManagerApp extends Application {
         
         // Add event handler
         button.setOnAction(event -> handleCategoryClick(text));
+        
+        return button;
+    }
+    
+    private Button createMealPlanButton(String day) {
+        Button button = new Button("📅 " + day);
+        button.setStyle("-fx-background-color: #f5f5f5; -fx-text-fill: black; -fx-alignment: CENTER_LEFT;");
+        button.setMaxWidth(Double.MAX_VALUE);
+        button.setPadding(new Insets(10, 15, 10, 10));
+        
+        // Add event handler
+        button.setOnAction(event -> handleMealPlanClick(day));
         
         return button;
     }
@@ -264,32 +301,26 @@ public class RecipeManagerApp extends Application {
         metaInfo.getChildren().addAll(timeInfo, categoryInfo);
         
         // Action buttons
-        HBox actions = new HBox(5); // Reduce spacing
+        HBox actions = new HBox(5);
         actions.setPrefWidth(Double.MAX_VALUE);
         actions.setAlignment(Pos.CENTER_LEFT);
         
         Button viewButton = new Button("👁️ View");
-        viewButton.setStyle("-fx-background-color: transparent; -fx-padding: 2 5;"); // Smaller padding
-        viewButton.setFont(Font.font("Arial", 12)); // Smaller font
+        viewButton.setStyle("-fx-background-color: transparent; -fx-padding: 2 5;");
+        viewButton.setFont(Font.font("Arial", 12));
+        
+        Button planMealButton = new Button("📅 Plan");
+        planMealButton.setStyle("-fx-background-color: transparent; -fx-padding: 2 5;");
+        planMealButton.setFont(Font.font("Arial", 12));
         
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
         
-
-        // Button editButton = new Button("✏️ Edit");
-        // editButton.setStyle("-fx-background-color: transparent; -fx-padding: 2 5;");
-        
-        // Button deleteButton = new Button("🗑️ Delete");  
-        // deleteButton.setStyle("-fx-background-color: transparent; -fx-padding: 2 5;");
-        // actions.getChildren().addAll(viewButton, spacer, editButton, deleteButton);
-        
-        actions.getChildren().addAll(viewButton, spacer);
+        actions.getChildren().addAll(viewButton, planMealButton, spacer);
 
         // Add event handlers
         viewButton.setOnAction(event -> handleViewRecipe(recipeName));
-
-        // editButton.setOnAction(event -> handleEditRecipe(recipeName));
-        // deleteButton.setOnAction(event -> handleDeleteRecipe(recipeName));
+        planMealButton.setOnAction(event -> showMealPlanDialog(recipeName));
         
         recipeInfo.getChildren().addAll(nameLabel, metaInfo, actions);
         card.getChildren().addAll(imageView, recipeInfo);
@@ -684,102 +715,194 @@ public class RecipeManagerApp extends Application {
         dialog.showAndWait();
     }
     
-    // private void handleEditRecipe(String recipeName) {
-    //     VBox recipeCard = findRecipeCard(recipeName);
-    //     if (recipeCard == null) return;
-
-    //     Recipe currentRecipe = recipeData.get(recipeName);
-    //     if (currentRecipe == null) return;
-
-    //     Dialog<Recipe> dialog = new Dialog<>();
-    //     dialog.setTitle("Edit Recipe");
-    //     dialog.setHeaderText(null);
-
-    //     ButtonType saveButtonType = new ButtonType("Save", ButtonBar.ButtonData.OK_DONE);
-    //     dialog.getDialogPane().getButtonTypes().addAll(saveButtonType, ButtonType.CANCEL);
-
-    //     GridPane grid = new GridPane();
-    //     grid.setHgap(10);
-    //     grid.setVgap(10);
-    //     grid.setPadding(new Insets(20));
-
-    //     // Create and populate fields with current values
-    //     TextField nameField = new TextField(currentRecipe.name);
-    //     TextField timeField = new TextField(currentRecipe.time);
-    //     TextArea ingredientsArea = new TextArea(currentRecipe.ingredients);
-    //     TextArea instructionsArea = new TextArea(currentRecipe.instructions);
-
-    //     ingredientsArea.setPrefRowCount(4);
-    //     ingredientsArea.setWrapText(true);
-    //     instructionsArea.setPrefRowCount(4);
-    //     instructionsArea.setWrapText(true);
-
-    //     // Style headers
-    //     Label ingredientsHeader = new Label("Ingredients");
-    //     ingredientsHeader.setFont(Font.font("Arial", FontWeight.BOLD, 14));
-    //     Label instructionsHeader = new Label("Instructions");
-    //     instructionsHeader.setFont(Font.font("Arial", FontWeight.BOLD, 14));
-
-    //     // Add all elements to grid
-    //     grid.add(new Label("Recipe Name:"), 0, 0);
-    //     grid.add(nameField, 1, 0);
-    //     grid.add(new Label("Cooking Time:"), 0, 1);
-    //     grid.add(timeField, 1, 1);
-    //     grid.add(ingredientsHeader, 0, 2, 2, 1);
-    //     grid.add(ingredientsArea, 0, 3, 2, 1);
-    //     grid.add(instructionsHeader, 0, 4, 2, 1);
-    //     grid.add(instructionsArea, 0, 5, 2, 1);
-
-    //     dialog.getDialogPane().setContent(grid);
-    //     dialog.getDialogPane().setPrefWidth(400);
-
-    //     dialog.setResultConverter(dialogButton -> {
-    //         if (dialogButton == saveButtonType) {
-    //             return new Recipe(
-    //                 nameField.getText(),
-    //                 timeField.getText(),
-    //                 currentRecipe.category,
-    //                 ingredientsArea.getText(),
-    //                 instructionsArea.getText()
-    //             );
-    //         }
-    //         return null;
-    //     });
-
-    //     dialog.showAndWait().ifPresent(recipe -> {
-    //         // Update the recipe data
-    //         recipeData.put(recipe.name, recipe);
-    //         // Update the recipe card
-    //         updateRecipeCard(recipeCard, recipe);
-    //     });
-    // }
-    
-    // private void handleDeleteRecipe(String recipeName) {
-    //     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-    //     alert.setTitle("Delete Recipe");
-    //     alert.setHeaderText("Delete " + recipeName);
-    //     alert.setContentText("Are you sure you want to delete this recipe?");
-
-    //     alert.showAndWait().ifPresent(result -> {
-    //         if (result == ButtonType.OK) {
-    //             // Remove the recipe from the data map
-    //             recipeData.remove(recipeName);
+    private void handleMealPlanClick(String day) {
+        Dialog<Void> dialog = new Dialog<>();
+        dialog.setTitle("Meal Plan for " + day);
+        dialog.setHeaderText(null);
+        
+        ButtonType closeButton = new ButtonType("Close", ButtonBar.ButtonData.CANCEL_CLOSE);
+        dialog.getDialogPane().getButtonTypes().add(closeButton);
+        
+        VBox content = new VBox(15);
+        content.setPadding(new Insets(20));
+        content.setStyle("-fx-background-color: white;");
+        
+        Label headerLabel = new Label("Planned Meals for " + day);
+        headerLabel.setFont(Font.font("Arial", FontWeight.BOLD, 18));
+        
+        List<Recipe> plannedMeals = mealPlans.getOrDefault(day, new ArrayList<>());
+        
+        if (plannedMeals.isEmpty()) {
+            Label placeholder = new Label("No meals planned yet");
+            placeholder.setStyle("-fx-text-fill: #666666;");
+            content.getChildren().addAll(headerLabel, placeholder);
+        } else {
+            VBox mealsContainer = new VBox(10);
+            
+            for (Recipe recipe : plannedMeals) {
+                // Enhanced meal card with more details
+                VBox mealCard = new VBox(10);
+                mealCard.setStyle("-fx-background-color: #f8f8f8; -fx-padding: 15; -fx-background-radius: 5;");
                 
-    //             // Find and remove the recipe card from UI
-    //             VBox recipeCard = findRecipeCard(recipeName);
-    //             if (recipeCard != null) {
-    //                 FlowPane flowPane = (FlowPane) recipeCard.getParent();
-    //                 flowPane.getChildren().remove(recipeCard);
-                    
-    //                 // If flowPane is empty, remove the category section
-    //                 if (flowPane.getChildren().isEmpty()) {
-    //                     VBox categorySection = (VBox) flowPane.getParent();
-    //                     categorySection.getChildren().remove(flowPane);
-    //                 }
-    //             }
-    //         }
-    //     });
-    // }
+                // Header with name and remove button
+                HBox header = new HBox(10);
+                header.setAlignment(Pos.CENTER_LEFT);
+                
+                Label nameLabel = new Label(recipe.name);
+                nameLabel.setFont(Font.font("Arial", FontWeight.BOLD, 16));
+                
+                Region spacer = new Region();
+                HBox.setHgrow(spacer, Priority.ALWAYS);
+                
+                Button removeButton = new Button("❌");
+                removeButton.setStyle("-fx-background-color: transparent;");
+                
+                header.getChildren().addAll(nameLabel, spacer, removeButton);
+                
+                // Recipe details
+                HBox details = new HBox(15);
+                details.setAlignment(Pos.CENTER_LEFT);
+                
+                Label timeLabel = new Label("🕒 " + recipe.time);
+                Label categoryLabel = new Label(recipe.category);
+                
+                details.getChildren().addAll(timeLabel, categoryLabel);
+                
+                // Preview of ingredients
+                Label ingredientsLabel = new Label("Ingredients:");
+                ingredientsLabel.setFont(Font.font("Arial", FontWeight.BOLD, 12));
+                
+                TextArea ingredientsPreview = new TextArea(recipe.ingredients);
+                ingredientsPreview.setEditable(false);
+                ingredientsPreview.setWrapText(true);
+                ingredientsPreview.setPrefRowCount(2);
+                ingredientsPreview.setStyle("-fx-control-inner-background: #ffffff;");
+                
+                // View full recipe button
+                Button viewButton = new Button("👁️ View Full Recipe");
+                viewButton.setStyle("-fx-background-color: #3a3f44; -fx-text-fill: white;");
+                
+                mealCard.getChildren().addAll(
+                    header,
+                    details,
+                    ingredientsLabel,
+                    ingredientsPreview,
+                    viewButton
+                );
+                
+                // Add event handlers
+                removeButton.setOnAction(e -> {
+                    plannedMeals.remove(recipe);
+                    if (plannedMeals.isEmpty()) {
+                        mealPlans.remove(day);
+                        content.getChildren().clear();
+                        Label noMealsLabel = new Label("No meals planned yet");
+                        noMealsLabel.setStyle("-fx-text-fill: #666666;");
+                        content.getChildren().addAll(headerLabel, noMealsLabel);
+                    } else {
+                        mealsContainer.getChildren().remove(mealCard);
+                    }
+                });
+                
+                viewButton.setOnAction(e -> handleViewRecipe(recipe.name));
+                
+                mealsContainer.getChildren().add(mealCard);
+            }
+            
+            content.getChildren().addAll(headerLabel, mealsContainer);
+        }
+        
+        ScrollPane scrollPane = new ScrollPane(content);
+        scrollPane.setFitToWidth(true);
+        scrollPane.setStyle("-fx-background-color: white;");
+        
+        dialog.getDialogPane().setContent(scrollPane);
+        dialog.getDialogPane().setPrefWidth(450);
+        dialog.getDialogPane().setPrefHeight(600);
+        
+        dialog.showAndWait();
+    }
+    
+    private void showMealPlanDialog(String recipeName) {
+        Recipe recipe = recipeData.get(recipeName);
+        if (recipe == null) return;
+        
+        Dialog<String> dialog = new Dialog<>();
+        dialog.setTitle("Add to Meal Plan");
+        dialog.setHeaderText("Choose a day to add " + recipeName);
+        
+        ButtonType addButton = new ButtonType("Add", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(addButton, ButtonType.CANCEL);
+        
+        VBox content = new VBox(15);
+        content.setPadding(new Insets(20));
+        
+        // Add recipe preview
+        VBox recipePreview = new VBox(10);
+        recipePreview.setStyle("-fx-background-color: #f8f8f8; -fx-padding: 15; -fx-background-radius: 5;");
+        
+        // Recipe image
+        ImageView imageView = createRecipeImageView(recipeName);
+        imageView.setFitWidth(200);
+        imageView.setFitHeight(120);
+        
+        // Recipe details
+        Label nameLabel = new Label(recipe.name);
+        nameLabel.setFont(Font.font("Arial", FontWeight.BOLD, 16));
+        
+        Label timeLabel = new Label("🕒 " + recipe.time);
+        Label categoryLabel = new Label(recipe.category);
+        
+        // Preview of ingredients
+        Label ingredientsTitle = new Label("Ingredients:");
+        ingredientsTitle.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        TextArea ingredientsPreview = new TextArea(recipe.ingredients);
+        ingredientsPreview.setEditable(false);
+        ingredientsPreview.setWrapText(true);
+        ingredientsPreview.setPrefRowCount(3);
+        ingredientsPreview.setStyle("-fx-control-inner-background: #ffffff;");
+        
+        recipePreview.getChildren().addAll(
+            imageView, 
+            nameLabel, 
+            timeLabel, 
+            categoryLabel,
+            ingredientsTitle,
+            ingredientsPreview
+        );
+        
+        // Day selection
+        Label selectDayLabel = new Label("Select day to add this meal:");
+        selectDayLabel.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        selectDayLabel.setPadding(new Insets(10, 0, 5, 0));
+        
+        ComboBox<String> dayPicker = new ComboBox<>();
+        dayPicker.getItems().addAll(
+            "Monday", "Tuesday", "Wednesday", "Thursday",
+            "Friday", "Saturday", "Sunday"
+        );
+        dayPicker.setValue("Monday");
+        dayPicker.setMaxWidth(Double.MAX_VALUE);
+        
+        content.getChildren().addAll(recipePreview, selectDayLabel, dayPicker);
+        dialog.getDialogPane().setContent(content);
+        dialog.getDialogPane().setPrefWidth(300);
+        
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == addButton) {
+                return dayPicker.getValue();
+            }
+            return null;
+        });
+        
+        dialog.showAndWait().ifPresent(day -> {
+            mealPlans.computeIfAbsent(day, k -> new ArrayList<>()).add(recipe);
+            showAlert(
+                "Meal Planned",
+                recipeName + " has been added to your meal plan for " + day
+            );
+        });
+    }
     
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -822,23 +945,6 @@ public class RecipeManagerApp extends Application {
         }
         return null;
     }
-
-
-    // private void updateRecipeCard(VBox recipeCard, Recipe recipe) {
-    //     VBox recipeInfo = (VBox) recipeCard.getChildren().get(1);
-        
-    //     // Update name
-    //     Label nameLabel = (Label) recipeInfo.getChildren().get(0);
-    //     nameLabel.setText(recipe.name);
-        
-    //     // Update time and category
-    //     HBox metaInfo = (HBox) recipeInfo.getChildren().get(1);
-    //     Label timeInfo = (Label) metaInfo.getChildren().get(0);
-    //     timeInfo.setText("🕒 " + recipe.time);
-        
-    //     Label categoryInfo = (Label) metaInfo.getChildren().get(1);
-    //     categoryInfo.setText(getCategoryEmoji(recipe.category) + " " + recipe.category);
-    // }
 
     public static void main(String[] args) {
         launch(args);
