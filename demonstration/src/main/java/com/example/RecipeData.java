@@ -106,7 +106,7 @@ public class RecipeData {
             "🍲 Soups",
             "• Fresh tomatoes\n• Onion\n• Garlic\n• Vegetable stock\n• Cream",
             "1. Sauté onions and garlic\n2. Add tomatoes and stock\n3. Simmer and blend\n4. Add cream",
-            ""
+            "com"
         ));
         
         recipes.put("Chicken Noodle Soup", new Recipe(
