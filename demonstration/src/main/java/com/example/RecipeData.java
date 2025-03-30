@@ -10,187 +10,258 @@ public class RecipeData {
         // Main Dishes 
         recipes.put("Chicken Adobo", new Recipe(
             "Chicken Adobo",
-            "30 mins",
+            "1 hour (including marination)",
             "🍽️ Main Dishes",
-            "• 400g spaghetti\n• 4 eggs\n• 200g pancetta\n• 100g Pecorino Romano\n• 100g Parmigiano-Reggiano\n• Black pepper\n• Salt",
-            "1. Cook pasta in salted water\n2. Fry pancetta until crispy\n3. Mix eggs, cheese, and pepper\n4. Combine hot pasta with egg mixture\n5. Add pancetta and serve immediately",
-            "com/example/images/main/Chicken_adobo.jpg"
+            "• 1 kg chicken or pork\n• 1 cup soy sauce\n• 1 cup vinegar\n• 1 head garlic, crushed\n• 2 bay leaves\n• 1 tsp black peppercorns\n• 2 tbsp oil\n• Salt to taste",
+            "1. Marinate the meat in soy sauce, garlic, bay leaves, and peppercorns for at least 30 minutes.\n2. Heat oil in a pot and sauté the marinated meat until browned.\n3. Add vinegar and bring to a boil without stirring. Simmer for 30 minutes.\n4. Adjust seasoning and serve with rice.",
+            "com/example/images/main/adobo.jpg"
         ));
         
-        recipes.put("Beef Caldereta", new Recipe(
-            "Beef Caldereta",
-            "25 mins",
+        recipes.put("Pinakbet", new Recipe(
+            "Pinakbet",
+            "1 hour",
             "🍽️ Main Dishes",
-            "• 4 chicken breasts\n• 2 tbsp olive oil\n• 2 cloves garlic\n• 1 tsp oregano\n• Salt and pepper",
-            "1. Marinate chicken with oil and herbs\n2. Preheat grill\n3. Grill 6-7 minutes per side\n4. Let rest before serving",
-            "com/example/images/main/beef-caldereta.jpg"
+            "• 1/2 kg pork belly, cubed \n• 1 cup water\n• 1 onion, chopped\n• 2-3 cloves garlic, minced\n• 1 cup tomatoes, chopped\n• 1 cup eggplant, sliced\n• 1 cup bitter melon (ampalaya), sliced\n• 1 cup squash, cubed\n• 1 cup string beans \n• 2-3 tbsp shrimp paste (bagoong)\n• Salt and pepper to taste",
+            "1. Sauté onion and garlic until fragrant. Add pork and cook until browned.\n2. Add tomatoes and water; simmer until pork is tender.\n3. Add vegetables and shrimp paste; cook until vegetables are tender. Season to taste.",
+            "com/example/images/main/pinakbet.jpg"
         ));
         
         recipes.put("Bicol Express", new Recipe(
             "Bicol Express",
-            "20 mins",
+            "1 hour",
             "🍽️ Main Dishes",
-            "• 500g beef strips\n• Mixed vegetables\n• Soy sauce\n• Ginger and garlic\n• Cooking oil",
-            "1. Heat oil in wok\n2. Stir fry beef until browned\n3. Add vegetables\n4. Add sauce and seasonings\n5. Serve hot",
-            "com/example/images/main/bicol-express.jpg"
+            "• 1 kg pork belly, cubed.\n• 1 can coconut milk.\n• 1 onion, chopped.\n• 2-3 green chilies.\n• 1 tbsp shrimp paste.\n• Salt to taste",
+            "1. Sauté onion in a pot until translucent. Add pork and cook until browned.\n2. Stir in shrimp paste and green chilies; sauté for a few minutes.\n3. Pour in coconut milk and simmer until thick and pork is tender. Season to taste.",
+            "com/example/images/main/bico-express.jpg"
         ));
         
         recipes.put("Laing", new Recipe(
             "Laing",
-            "25 mins",
+            "30-40 mins",
             "🍽️ Main Dishes",
-            "• 4 salmon fillets\n• Lemon\n• Dill\n• Butter\n• Salt and pepper",
-            "1. Preheat oven to 400°F\n2. Season salmon\n3. Add lemon and dill\n4. Bake for 12-15 minutes",
+            "• 2 cups dried taro leaves.\n• 1 can coconut milk.\n• 1 onion, chopped.\n• 2-3 cloves garlic, minced.\n• 2-3 red chilies.\n• 1/2 cup shrimp or pork (optional).\n• Salt to taste",
+            "1. Sauté onion and garlic until fragrant. Add shrimp or pork (if using) and cook until done.\n2. Add taro leaves and stir for a few minutes.\n3. Pour in coconut milk and simmer until leaves are tender. Season with salt.",
             "com/example/images/main/laing.jpg"
         ));
         
-        recipes.put("Menudo", new Recipe(
-            "Menudo",
+        recipes.put("Pork Menudo", new Recipe(
+            "Pork Menudo",
             "60 mins",
             "🍽️ Main Dishes",
-            "• Lasagna noodles\n• Ricotta cheese\n• Mixed vegetables\n• Tomato sauce\n• Mozzarella",
-            "1. Layer noodles and filling\n2. Add sauce and cheese\n3. Repeat layers\n4. Bake until bubbly",
+            "• 1 kg pork, cubed.\n• 1 cup tomato sauce.\n• 1 onion, chopped.\n• 2-3 cloves garlic, minced.\n• 1 cup carrots, diced.\n• 1 cup potatoes, diced.\n• 1/2 cup green peas.\n• 2 tbsp cooking oil.\n• Salt and pepper to taste",
+            "1. Heat oil in a pan and sauté onion and garlic until fragrant.\n2. Add pork and cook until browned. Stir in tomato sauce and simmer.\n3. Add carrots, potatoes, and peas; cook until vegetables are tender. Season to taste. ",
             "com/example/images/main/menudo.jpg"
         ));
 
         recipes.put("Chicken Curry", new Recipe(
             "Chicken Curry",
-            "45 mins",
+            "60 mins",
             "🍽️ Main Dishes",
-            "• 500g chicken\n• Curry powder\n• Coconut milk\n• Onions\n• Garlic\n• Ginger",
-            "1. Sauté onions, garlic, ginger\n2. Add chicken and curry powder\n3. Pour in coconut milk\n4. Simmer until cooked",
-            "com/example/images/main/chicken-curry.jpg"
+            "• 1 kg chicken, cut into pieces.\n• 2-3 cups coconut milk.\n• 1 onion, chopped.\n• 2-3 cloves garlic, minced.\n• 1-2 tbsp curry powder.\n• 1 cup potatoes, diced.\n• 1 cup carrots, diced.\n• Salt and pepper to taste",
+            "1 Sauté onion and garlic until fragrant. Add chicken and cook until browned.\n2. Stir in curry powder, then add coconut milk. Simmer until chicken is cooked through.\n3. Add potatoes and carrots; cook until tender. Season to taste.",
+            "com/example/images/main/curry.jpg"
         ));
 
         recipes.put("Monggo pork", new Recipe(
             "Monggo pork",
-            "30 mins",
+            "60 mins",
             "🍽️ Main Dishes",
-            "• Ground beef\n• Burger buns\n• Lettuce\n• Tomato\n• Cheese\n• Onion",
-            "1. Form beef patties\n2. Grill until desired doneness\n3. Add cheese to melt\n4. Assemble with toppings",
+            "• 1 cup mung beans (monggo).\n• 1/2 kg pork belly, cubed.\n• 1 onion, chopped.\n• 2-3 cloves garlic, minced.\n• 2-3 cups water.\n• 1 cup spinach or water spinach (kangkong).\n• 1-2 tomatoes, chopped.\n• 1-2 tablespoons fish sauce (patis).\n• Salt and pepper to taste.\n• 2 tablespoons cooking oil",
+            "1. Rinse mung beans under cold water.\n2In a pot, boil them in 3 cups of water until tender. This usually takes about 30-40 minutes. (You can add more water if needed).\n3. In another pot, heat oil over medium heat. Sauté onion and garlic until fragrant.\n4. Add chopped tomatoes to the pork and cook until softened.\n5. Pour in the cooked mung beans along with the water they were boiled in. Stir to combine.\n6. Add fish sauce, salt, and pepper to taste. Let it simmer for about 15-20 minutes to allow the flavors to meld.\n7. Stir in the spinach or water spinach and cook for an additional 5 minutes until the greens are wilted.\n8. Adjust seasoning if necessary and serve hot with rice.",
             "com/example/images/main/monggo-pork.jpg"
         ));
 
-        recipes.put("Sinigang pork", new Recipe(
-            "Sinigang pork",
-            "20 mins",
+        recipes.put("Sinigang Pork", new Recipe(
+            "Sinigang Pork",
+            "60 mins",
             "🍽️ Main Dishes",
-            "• Shrimp\n• Garlic\n• White wine\n• Butter\n• Lemon\n• Parsley",
-            "1. Sauté garlic in butter\n2. Add shrimp and cook\n3. Add wine and lemon\n4. Garnish with parsley",
-            "com/example/images/main/sinigang-pork.jpg"
+            "• 1 kg pork (belly or ribs).\n• 1 onion, quartered.\n• 2-3 tomatoes, quartered.\n• 1 radish, sliced.\n• 1 cup eggplant, sliced.\n• 1 cup water spinach (kangkong).\n• 1 packet tamarind mix.\n• Salt and pepper to taste",
+            "1. Boil pork and onion in water until tender.\n2. Add tomatoes and radish; cook for 10 minutes.\n3. Stir in tamarind mix, eggplant, and kangkong. Season to taste.",
+            "com/example/images/main/sinigang-na-baboy.jpg"
         ));
 
-        recipes.put("Tinolang Chicken", new Recipe(
-            "Tinolang Chicken",
-            "35 mins",
+        recipes.put("Beef Caldereta", new Recipe(
+            "Beef Caldereta",
+            "2 hours",
             "🍽️ Main Dishes",
-            "• Pork chops\n• Herbs\n• Garlic\n• Butter\n• Salt and pepper",
-            "1. Season pork chops\n2. Heat pan with butter\n3. Cook 5-6 mins each side\n4. Rest before serving",
-            "com/example/images/main/tinolang-chicken.jpg"
+            "• 1 kg beef, cubed.\n• 2 cups beef broth.\n• 1 onion, chopped.\n• 2-3 cloves garlic, minced.\n• 2 carrots, sliced.\n• 1 cup potatoes, cubed.\n• 1 cup bell peppers, slice.\n• 1/2 cup tomato sauce.\n• 1/2 cup liver spread.\n• 2 tbsp cooking oil.\n• Salt and pepper to taste",
+            "1. Heat oil in a pot and sauté onion and garlic until fragrant.\n2 Add beef and cook until browned.\n3. Pour in beef broth and tomato sauce. Simmer until beef is tender.\n4. Add carrots, potatoes, and bell peppers; cook until vegetables are tender.\n5. Stir in liver spread and season to taste.",
+            "com/example/images/main/beef-caldereta.jpg"
         ));
 
         recipes.put("Adobong pusit", new Recipe(
             "Adobong pusit",
-            "50 mins",
+            "30-40 mins",
             "🍽️ Main Dishes",
-            "• Eggplant\n• Breadcrumbs\n• Marinara sauce\n• Mozzarella\n• Parmesan",
-            "1. Bread eggplant slices\n2. Fry until golden\n3. Layer with sauce and cheese\n4. Bake until bubbly",
-            "com/example/images/main/adobong-pusit.jpg"
+            "• 1 kg squid, cleaned and sliced.\n• 1 cup soy sauce.\n• 1/2 cup vinegar.\n• 1 head garlic, crushed.\n• 1 onion, chopped.\n• 2-3 bay leaves.\n• 2 tbsp oil.\n• Salt and pepper to taste",
+            "1. Marinate squid in soy sauce, vinegar, garlic, and bay leaves for 30 minutes..\n2 Heat oil in a pan and sauté onion until fragrant. Add squid and cook for a few minutes..\n3 Pour in the marinade and simmer until sauce thickens. Season to taste.",
+            "com/example/images/main/AdobongPusit.jpg"
+        ));
+
+        recipes.put("Spaghetti", new Recipe(
+            "Spaghetti",
+            "30-40 mins",
+            "🍽️ Main Dishes",
+            "• 500 g spaghetti noodles.\n• 1 lb ground beef.\n• 1 onion, chopped.\n• 2-3 cloves garlic, minced.\n•1 can tomato sauce.\n• 1/2 cup grated cheese.\n• Salt and pepper to taste",
+            "1. Cook spaghetti noodles according to package instructions. Drain and set aside.\n2. Sauté onion and garlic in a pan, then add ground beef and cook until browned.\n3. Stir in tomato sauce and season. Simmer for 10-15 minutes.\n4. Mix with cooked spaghetti and top with cheese.",
+            "com/example/images/main/spaghetti.jpg"
+        ));
+
+        recipes.put("Pancit Bihon", new Recipe(
+            "Pancit Bihon",
+            "30-40 mins",
+            "🍽️ Main Dishes",
+            "•400 g spaghetti.\n• 200 g bacon or pancetta, chopped.\n• 2-3 eggs.\n• 1/2 cup grated cheese (Parmesan or Pecorino).\n• 1/2 cup heavy cream (optional).\n• Salt and pepper to taste",
+            "1. Soak bihon noodles in warm water until softened, then drain.\n2. Sauté garlic, add chicken, and cook until browned.\n3. Add vegetables, noodles, and chicken broth; cook until noodles are tender. Season with \n4. soy sauce.",
+            "com/example/images/main/pancit-bihon.jpg"
+        ));
+
+        recipes.put("Carbonara", new Recipe(
+            "Carbonara",
+            "20-30 mins",
+            "🍽️ Main Dishes",
+            "• 250 g rice noodles.\n• 1 cup chicken, shredded.\n• 1 cup vegetables (carrots, bell peppers, cabbage).\n• 2-3 cloves garlic, minced.\n• 2 cups chicken broth.\n• Soy sauce to taste.\n• 2 tbsp oil",
+            "1. Cook spaghetti according to package instructions. Reserve some pasta water.\n2. Sauté bacon until crispy. In a bowl, whisk eggs and cheese.\n3. Combine hot spaghetti with bacon and the egg mixture. Add pasta water as needed for.\n4. creaminess. Season to taste.",
+            "com/example/images/main/carbonara.jpeg"
         ));
 
 
-        // SOUPS (10 recipes)
-        recipes.put("Shrimp Sinigang", new Recipe(
-            "Shrimp Sinigang",
+        // SOUPS
+        recipes.put("Chicken Ginger Soup (Tinola)", new Recipe(
+            "Chicken Ginger Soup (Tinola)",
             "45 mins",
             "🍲 Soups",
-            "• Fresh tomatoes\n• Onion\n• Garlic\n• Vegetable stock\n• Cream",
-            "1. Sauté onions and garlic\n2. Add tomatoes and stock\n3. Simmer and blend\n4. Add cream",
-            "com"
+            "• 1 kg chicken, cut into pieces.\n• 1 onion, chopped.\n• 1 ginger, sliced.\n• 2-3 cups water.\n• 1 cup green papaya, sliced.\n• Fish sauce to taste",
+            "1. Sauté onion and ginger in a pot until fragrant.\n2. Add chicken and cook until browned.\n3. Pour in water and let it boil. Simmer until chicken is cooked through.\n4. Add papaya and cook until tender. Finally, stir in spinach and season with fish sauce.\n5. Serve hot.",
+            "com/example/images/soups/tinolang-manok.jpg"
         ));
         
-        recipes.put("Chicken Noodle Soup", new Recipe(
-            "Chicken Noodle Soup",
-            "50 mins",
+        recipes.put("Miso Soup with Fish", new Recipe(
+            "Miso Soup with Fish",
+            "30 mins",
             "🍲 Soups",
-            "• Chicken\n• Egg noodles\n• Carrots\n• Celery\n• Onion",
-            "1. Cook chicken in broth\n2. Add vegetables\n3. Cook noodles\n4. Season and serve",
-            ""
+            "• 1/2 kg fish (such as bangus or tilapia).\n• 1/4 cup miso paste.\n• 1 onion, sliced.\n• 2-3 cups water.\n• 1 cup tofu, cubed.\n• 1 cup spinach or green onions, chopped",
+            "1. In a pot, bring water to a boil and add onions.\n2. Once boiling, add the fish and cook until it flakes easily.\n3. In a small bowl, dissolve miso paste in a bit of hot broth, then stir it into the pot.\n4. Add tofu and cook for a few minutes. Finish with spinach or green onions\n5. Serve hot.",
+            "com/example/images/soups/miso-fish.JPG"
         ));
 
-        recipes.put("Mushroom Soup", new Recipe(
-            "Mushroom Soup",
-            "40 mins",
+        recipes.put("Labanos Soup (Radish Soup)", new Recipe(
+            "Labanos Soup (Radish Soup)",
+            "60 mins",
             "🍲 Soups",
-            "• Mixed mushrooms\n• Onion\n• Garlic\n• Cream\n• Thyme",
-            "1. Sauté mushrooms and onions\n2. Add garlic and thyme\n3. Add stock and simmer\n4. Blend and add cream",
-            ""
+            "• 1 radish (labanos), sliced.\n• 1/2 kg pork belly, cubed.\n• 1 onion, chopped.\n• 2-3 cups water.\n• Fish sauce to taste.\n• Green onions for garnish",
+            "1. Sauté onion and pork in a pot until pork is browned.\n2. Add water and bring to a boil. Simmer until the pork is tender.\n3. Add sliced radish and cook until tender. Season with fish sauce.\n4. Garnish with green onions and serve hot.",
+            "com/example/images/soups/labanos.jpg"
         ));
 
-        recipes.put("Butternut Squash Soup", new Recipe(
-            "Butternut Squash Soup",
-            "55 mins",
+        recipes.put("Bulalo (Beef Bone Soup)", new Recipe(
+            "Bulalo (Beef Bone Soup)",
+            "2 hours",
             "🍲 Soups",
-            "• Butternut squash\n• Onion\n• Apple\n• Cream\n• Spices",
-            "1. Roast squash\n2. Sauté onions and apple\n3. Blend with stock\n4. Add cream and spices",
-            ""
+            "• 1 kg beef shank with bone.\n• 1 onion, quartered.\n• 2-3 cups water.\n• 1 cup corn, cut in half.\n• 1 cup potatoes, cubed.\n• 1 cup cabbage, chopped.\n• Salt and pepper to taste",
+            "1. Boil beef shank and onion in water until tender (about 2 hours).\n2. Add corn and potatoes; cook until soft.\n3. Add cabbage and season with salt and pepper.\n4. Serve hot with rice.",
+            "com/example/images/soups/bulalo.jpg"
         ));
 
-        recipes.put("Lentil Soup", new Recipe(
-            "Lentil Soup",
+        recipes.put("Sopas (Filipino Macaroni Soup)", new Recipe(
+            "Sopas (Filipino Macaroni Soup)",
+            "30-40 mins",
+            "🍲 Soups",
+            "• 1 cup macaroni.\n• 1/2 kg chicken, shredded.\n• 1 onion, chopped.\n• 2-3 cups water.\n• 1 cup milk.\n• 1/2 cup carrots, diced.\n• Salt and pepper to taste",
+            "1. In a pot, boil water and cook macaroni until al dente. Drain and set aside.\n2. Sauté onion and add shredded chicken, cooking until heated through.\n3. Add water, carrots, and cooked macaroni; simmer for 10 minutes.\n4. Stir in milk and season with salt and pepper. Serve hot.",
+            "com/example/images/soups/sopas.jpg"
+        ));
+
+        recipes.put("Sinigang na Isda (Fish Sinigang)", new Recipe(
+            "Sinigang na Isda (Fish Sinigang)",
             "45 mins",
             "🍲 Soups",
-            "• Red lentils\n• Carrots\n• Celery\n• Onion\n• Spices",
-            "1. Sauté vegetables\n2. Add lentils and stock\n3. Simmer until tender\n4. Season to taste",
-            ""
+            "• 1 kg fish (e.g., tilapia or bangus).\n• 1 onion, quartered.\n• 2-3 tomatoes, quartered.\n• 1 radish, sliced.\n• 1 cup long green beans.\n• 1 packet tamarind mix or fresh tamarind.\n• Salt and pepper to taste.\n• 6 cups water",
+            "1. Boil water with onion and tomatoes for 10 minutes.\n2. Add fish and cook until it flakes easily.\n3. Stir in tamarind mix and radish; simmer for 5 minutes.\n4. Add green beans and season with salt and pepper. Serve hot.",
+            "com/example/images/soups/sinigang.jpg"
+
         ));
 
-        recipes.put("French Onion Soup", new Recipe(
-            "French Onion Soup",
-            "70 mins",
+        recipes.put("Arroz Caldo (Chicken Rice Porridge)", new Recipe(
+            "Arroz Caldo (Chicken Rice Porridge)",
+            "60 mins",
             "🍲 Soups",
-            "• Onions\n• Beef stock\n• Bread\n• Gruyere cheese\n• Butter",
-            "1. Caramelize onions\n2. Add stock and simmer\n3. Top with bread\n4. Broil with cheese",
-            ""
-
+            "• 1 cup rice.\n• 1/2 kg chicken, cut into pieces.\n• 1 onion, chopped.\n• 1 ginger, sliced.\n• 6 cups water or chicken broth.\n• Salt and pepper to taste.\n• Green onions and hard-boiled eggs for garnish",
+            "1. Sauté onion and ginger in a pot until fragrant.\n2. Add chicken and cook until browned.\n3. Stir in rice and add water or broth. Bring to a boil and simmer until rice is cooked and porridge is thickened.\n4. Season with salt and pepper. Garnish with green onions and hard-boiled eggs. Serve hot.",
+            "com/example/images/soups/arroz-caldo.jpg"
         ));
 
-        recipes.put("Minestrone", new Recipe(
-            "Minestrone",
-            "50 mins",
+        recipes.put("Batchoy (Ilocos Noodle Soup)", new Recipe(
+            "Batchoy (Ilocos Noodle Soup)",
+            "30-40 mins",
             "🍲 Soups",
-            "• Mixed vegetables\n• Pasta\n• Beans\n• Tomatoes\n• Herbs",
-            "1. Cook vegetables\n2. Add beans and tomatoes\n3. Cook pasta\n4. Add herbs",
-            ""
+            "• 1/2 kg pork, sliced.\n• 1/4 kg liver, sliced.\n• 4 cups beef broth.\n• 1 onion, chopped.\n• 2-3 cloves garlic, minced.\n• Egg noodles.\n• Green onions for garnish",
+            "1. Sauté onion and garlic; add pork and liver until cooked.\n2. Pour in beef broth and simmer for 10 minutes.\n3. Cook egg noodles separately and add to the soup.\n4. Garnish with green onions and serve hot.",
+            "com/example/images/soups/batchoy.jpg"
         ));
 
-        recipes.put("Clam Chowder", new Recipe(
-            "Clam Chowder",
-            "45 mins",
+        recipes.put("Sopa de Pichon (Pigeon Soup)", new Recipe(
+            "Sopa de Pichon (Pigeon Soup)",
+            "60 mins",
             "🍲 Soups",
-            "• Clams\n• Potatoes\n• Celery\n• Cream\n• Bacon",
-            "1. Cook bacon\n2. Add vegetables\n3. Add clams and cream\n4. Simmer until thick",
-            ""
+            "• 1 kg pigeon or quail.\n• 1 onion, chopped.\n• 2-3 cups water.\n• 1 cup potatoes, cubed.\n• Salt and pepper to taste",
+            "1. Boil pigeon or quail with onion in water until tender.\n2. Add potatoes and cook until soft. Season with salt and pepper.\n3. Serve hot.",
+            "com/example/images/soups/pichon.jpg"
         ));
 
-        recipes.put("Gazpacho", new Recipe(
-            "Gazpacho",
-            "20 mins",
+        recipes.put("Labanos at Baboy (Radish and Pork Soup)", new Recipe(
+            "Labanos at Baboy (Radish and Pork Soup)",
+            "60 mins",
             "🍲 Soups",
-            "• Tomatoes\n• Cucumber\n• Peppers\n• Garlic\n• Olive oil",
-            "1. Blend vegetables\n2. Add olive oil\n3. Season well\n4. Chill before serving",
-            ""
+            "• 1/2 kg pork belly, cubed.\n• 1 radish (labanos), sliced.\n• 1 onion, chopped.\n• 2-3 cups water.\n• 2-3 tablespoons fish sauce (patis).\n• Salt and pepper to taste.\n• Green onions for garnish",
+            "1. In a pot, sauté onion until translucent. Add pork and cook until browned.\n2. Pour in water and bring to a boil. Simmer until pork is tender (about 30-40 minutes).\n3. Add sliced radish and cook until tender (about 10 minutes).\n4. Season with fish sauce, salt, and pepper. Garnish with green onions before serving.",
+            "com/example/images/soups/labanos.jpg"
         ));
 
-        recipes.put("Miso Soup", new Recipe(
-            "Miso Soup",
-            "15 mins",
+        recipes.put("Pochero (Spanish-Style Stew)", new Recipe(
+            "Pochero (Spanish-Style Stew)",
+            "2 hours",
             "🍲 Soups",
-            "• Miso paste\n• Tofu\n• Seaweed\n• Green onions\n• Dashi stock",
-            "1. Make dashi stock\n2. Add miso paste\n3. Add tofu and seaweed\n4. Garnish with green onions",
-            ""
+            "• 1 kg beef shank, cut into pieces.\n• 1 onion, chopped.\n• 2-3 cups water.\n• 1 cup potatoes, cubed.\n• 1 cup carrots, sliced.\n• 1 cup cabbage, chopped.\n• 1 banana heart, sliced (optional).\n• 1/2 cup tomato sauce.\n• Salt and pepper to taste",
+            "1. In a pot, sauté onion until fragrant. Add beef and cook until browned.\n2. Pour in water and bring to a boil. Simmer until beef is tender (about 1-2 hours).\n3. Add potatoes, carrots, and banana heart; cook until tender.\n4. Stir in tomato sauce, cabbage, and season with salt and pepper. Serve hot.",
+            "com/example/images/soups/pochero.jpg"
         ));
 
+        recipes.put("Sinigang na Baboy sa Bayabas (Pork Sinigang with Guava)", new Recipe(
+            "Sinigang na Baboy sa Bayabas (Pork Sinigang with Guava)",
+            "60 mins",
+            "🍲 Soups",
+            "• 1 kg pork (belly or ribs).\n• 1 onion, quartered.\n• 2-3 tomatoes, quartered.\n• 2-3 ripe guavas, quartered.\n• 1 radish, sliced.\n• 1 cup long green beans.\n• 1 cup water spinach (kangkong).\n• 6 cups water.\n• Salt and pepper to taste",
+            "1.In a pot, boil the pork and onion in water until the pork is tender (about 45 minutes).\n2. Add tomatoes and guavas; cook for 10 minutes until guavas soften.\n3. Press the guavas against the side of the pot to release their flavor.\n4. Add radish and cook for about 5 minutes.\n5. Stir in the long green beans and cook until tender. Finally, add the kangkong and season with salt and pepper.\n6. Serve hot with rice.",
+            "com/example/images/soups/baboy-bayabas.jpg"
+        ));
+
+        recipes.put("Chicken and Corn Soup", new Recipe(
+            "Chicken and Corn Soup",
+            "30-40 mins",
+            "🍲 Soups",
+            "• 1/2 kg chicken, shredded.\n• 2 cups corn kernels (fresh or canned).\n• 1 onion, chopped.\n• 2-3 cups chicken broth or water.\n• 1/2 cup carrots, diced.\n• Salt and pepper to taste.\n• Green onions for garnish",
+            "1. In a pot, sauté onion until translucent. Add shredded chicken and cook until heated through.\n2. Pour in chicken broth or water, and add corn and carrots. Simmer until carrots are .\n• tender (about 15-20 minutes).\n3. Season with salt and pepper. Garnish with green onions before serving.",
+            "com/example/images/soups/corn-chicken.jpg"
+        ));
+
+        recipes.put("Sopas na Baka (Beef Macaroni Soup)", new Recipe(
+            "Sopas na Baka (Beef Macaroni Soup)",
+            "1 hour & 30 mins",
+            "🍲 Soups",
+            "• 1 cup macaroni.\n• 1/2 kg beef, cubed.\n• 1 onion, chopped.\n• 2-3 cups beef broth.\n• 1 cup carrots, diced.\n• 1 cup celery, chopped.\n• 1 cup milk.\n• Salt and pepper to taste",
+            "1. In a pot, boil macaroni in salted water until al dente. Drain and set aside.\2.• Sauté onion in a pot until fragrant. Add beef and cook until browned.\n3. Pour in beef broth and simmer until beef is tender (about 1 hour).\n4. Add carrots, celery, and cooked macaroni. Stir in milk and season with salt and pepper. Serve hot.",
+            "com/example/images/soups/sopas-baka.jpg"
+        ));
+
+        recipes.put("Caldo Verde (Green Soup)", new Recipe(
+            "Caldo Verde (Green Soup)",
+            "30 mins",
+            "🍲 Soups",
+            "• 1 kg potatoes, peeled and diced.\n• 1 onion, chopped.\n• 4 cups water or chicken broth.\n• 1 cup kale or spinach, chopped.\n• 2-3 cloves garlic, minced.\n• Olive oil.\n• Salt and pepper to taste",
+            "1. In a pot, sauté onion and garlic in olive oil until fragrant.\n2. Add potatoes and water or chicken broth; bring to a boil. Simmer until potatoes are tender (about 20 minutes).\n3. Mash the potatoes slightly in the pot to thicken the soup.\n4. Stir in kale or spinach and cook until wilted. Season with salt and pepper before serving.",
+            "com/example/images/soups/caldo-verde.jpg"
+        ));
 
         // DESSERTS (10 recipes)
         recipes.put("Chocolate Cake", new Recipe(
