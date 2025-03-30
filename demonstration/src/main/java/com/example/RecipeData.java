@@ -125,6 +125,23 @@ public class RecipeData {
             "com/example/images/main/carbonara.jpeg"
         ));
 
+        recipes.put("Beef Asado", new Recipe(
+            "Beef Asado",
+            "30 mins",
+            "🍽️ Main Dishes",
+            "• 2 lbs beef chuck (cut into cubes).\n• 1/4 cup soy sauce.\n• 1/4 cup vinegar.\n• 1 onion (sliced).\n• 3 cloves garlic (minced).\n• 2-3 tomatoes (chopped).\n• 1/2 cup water.\n• 2 tbsp cooking oil.\n• 1-2 bay leaves.\n• 1 tsp sugar.\n• Salt and pepper to taste.\n• Bell peppers (for garnish, optional)",
+            "1. In a bowl, marinate the beef cubes in soy sauce, vinegar, minced garlic, and black .\n• pepper for at least 30 minutes.\n2. Heat oil in a pot over medium heat. Remove the beef from the marinade (reserve the marinade) and brown the beef cubes.\n3. Add the sliced onion and chopped tomatoes, and sauté until the onion is soft.\n4. Pour in the reserved marinade and add water, bay leaves, and sugar. Bring to a boil.\n5. Lower the heat and simmer for about 1 hour, or until the beef is tender. Stir occasionally and add more water if needed.\n6. Season with salt and pepper to taste. Serve hot, with steamed rice and garnished with bell peppers if desired.",
+            "com/example/images/main/beef-asado.jpg"
+        ));
+
+        recipes.put("Bistek (Beef Steak)", new Recipe(
+            "Bistek (Beef Steak)",
+            "30 mins",
+            "🍽️ Main Dishes",
+            "• 1 lb beef sirloin (sliced into thin pieces).\n• 1/3 cup soy sauce.\n• 1/4 cup calamansi juice (or lemon juice).\n• 1/2 tsp black pepper.\n• 3 cloves garlic (minced).\n• 1 onion (sliced into rings).\n• 2-3 tbsp cooking oil.\n• Salt to taste.\n• Green onions (for garnish, optional)",
+            "1. In a bowl, marinate the beef slices in soy sauce, calamansi juice, black pepper, and minced garlic for at least 30 minutes.\n2. Heat oil in a pan over medium heat. Remove the beef from the marinade (reserve the marinade) and fry the beef slices until browned. Remove and set aside.\n3. In the same pan, sauté the onion rings until they are soft and translucent.\n4. Return the beef to the pan. Pour in the reserved marinade and simmer for about 10-15 minutes until the beef is cooked through and the sauce thickens slightly.\n5. Adjust seasoning with salt if needed. Serve hot, garnished with green onions, and enjoy with steamed rice.",
+            "com/example/images/main/bistek.jpg"
+        ));
 
         // SOUPS
         recipes.put("Chicken Ginger Soup (Tinola)", new Recipe(
@@ -263,107 +280,160 @@ public class RecipeData {
             "com/example/images/soups/caldo-verde.jpg"
         ));
 
+        
         // DESSERTS (10 recipes)
-        recipes.put("Chocolate Cake", new Recipe(
-            "Chocolate Cake",
-            "60 mins",
+        recipes.put("Mango Float", new Recipe(
+            "Mango Float",
+            "30 mins (plus chilling time)",
             "🍰 Desserts",
-            "• Flour\n• Cocoa powder\n• Sugar\n• Eggs\n• Butter",
-            "1. Mix dry ingredients\n2. Add wet ingredients\n3. Bake at 350°F\n4. Frost when cool",
-            ""
+            "• 2 ripe mangoes (sliced).\n• 1 pack (200g) graham crackers.\n• 1 can (14 oz) sweetened condensed milk.\n• 1 cup all-purpose cream.",
+            "1. In a bowl, mix condensed milk and all-purpose cream until smooth.\n2. In a dish, layer graham crackers, cream mixture, and mango slices.\n3. Repeat layers, finishing with the cream mixture on top.\n4. Chill for at least 4 hours or overnight before serving.",
+            "com/example/images/desserts/mango-float.jpg"
         ));
         
-        recipes.put("Apple Pie", new Recipe(
-            "Apple Pie",
-            "75 mins",
+        recipes.put("Biko (Sticky Rice Cake)", new Recipe(
+            "Biko (Sticky Rice Cake)",
+            "1 hour",
             "🍰 Desserts",
-            "• Pie crust\n• Apples\n• Sugar\n• Cinnamon\n• Butter",
-            "1. Prepare pie crust\n2. Mix apple filling\n3. Assemble pie\n4. Bake until golden",
-            ""
+            "• 2 cups glutinous rice.\n• 1 can (14 oz) coconut milk.\n• 1 cup brown sugar.\n• 1/2 tsp salt.\n• Grated coconut (for topping)",
+            "1. Cook glutinous rice according to package instructions.\n2. In a pot, mix coconut milk, brown sugar, and salt. Heat until sugar dissolves.\n3. Combine the cooked rice with the coconut mixture. Cook until thick.\n4. Pour into a greased dish, top with grated coconut, and let cool before serving.",
+            "com/example/images/desserts/biko.jpg"
         ));
 
-        recipes.put("Tiramisu", new Recipe(
-            "Tiramisu",
+        recipes.put("Tapioca Pudding (Sago)", new Recipe(
+            "Tapioca Pudding (Sago)",
             "40 mins",
             "🍰 Desserts",
-            "• Ladyfingers\n• Mascarpone\n• Coffee\n• Cocoa powder\n• Eggs",
-            "1. Dip ladyfingers in coffee\n2. Layer with cream\n3. Dust with cocoa\n4. Chill well",
-            ""
+            "• 1 cup tapioca pearls.\n• 1 can (14 oz) coconut milk.\n• 1 cup sugar.\n• 1/2 cup water.\n• 1/2 cup sweetened fruits (like mango or jackfruit)",
+            "1. Boil tapioca pearls in water until translucent (about 15 minutes). Drain and rinse.\n2. In a pot, combine coconut milk and sugar. Heat until sugar dissolves.\n3. Add cooked tapioca and sweetened fruits. Simmer for a few minutes.\n4. Chill before serving.",
+            "com/example/images/desserts/tapioca-pudding.jpg"
         ));
 
-        recipes.put("Cheesecake", new Recipe(
-            "Cheesecake",
-            "80 mins",
+        recipes.put("Puto Bumbong", new Recipe(
+            "Puto Bumbong",
+            "1 hour",
             "🍰 Desserts",
-            "• Cream cheese\n• Graham crackers\n• Sugar\n• Eggs\n• Vanilla",
-            "1. Make crust\n2. Mix filling\n3. Bake in water bath\n4. Cool completely"
+            "• 2 cups glutinous rice flour.\n• 1 cup water.\n• 1/2 cup purple rice (soaked overnight).\n• Grated coconut (for topping).\n• Brown sugar (for serving)",
+            "1. Drain purple rice and blend with water until smooth.\n2. In a bowl, mix glutinous rice flour with the purple rice mixture.\n3. Pour batter into puto bumbong molds and steam for 20-30 minutes.\n4. Serve topped with grated coconut and brown sugar.",
+            "com/example/images/desserts/puto-bumbong.jpg"
         ));
 
-        recipes.put("Brownies", new Recipe(
-            "Brownies",
-            "45 mins",
+        recipes.put("Cassava Cake", new Recipe(
+            "Cassava Cake",
+            "1.5 hours",
             "🍰 Desserts",
-            "• Chocolate\n• Butter\n• Sugar\n• Eggs\n• Flour",
-            "1. Melt chocolate and butter\n2. Mix ingredients\n3. Bake until set\n4. Cool before cutting"
+            "• 2 cups grated cassava (fresh or frozen).\n• 1 can (14 oz) coconut milk.\n• 1 can (14 oz) sweetened condensed milk.\n• 1 cup sugar.\n• 2 eggs.\n• 1 tsp vanilla extract.\n• 1/2 cup grated cheese (optional for topping)",
+            "1. Preheat oven to 350°F (175°C).\n2. In a bowl, mix cassava, coconut milk, condensed milk, sugar, eggs, and vanilla until well combined.\n3. Pour mixture into a greased baking dish.\n4. Bake for 45-50 minutes. If using cheese, sprinkle it on top and bake for an additional 10 minutes until melted.",
+            "com/example/images/desserts/cassava-cake.jpg"
         ));
 
-        recipes.put("Crème Brûlée", new Recipe(
-            "Crème Brûlée",
-            "50 mins",
+        recipes.put("Pineapple Upside-Down Cake", new Recipe(
+            "Pineapple Upside-Down Cake",
+            "1 hour",
             "🍰 Desserts",
-            "• Heavy cream\n• Vanilla bean\n• Egg yolks\n• Sugar",
-            "1. Heat cream with vanilla\n2. Mix with yolks\n3. Bake in water bath\n4. Caramelize sugar top"
+            "• 1 can (20 oz) pineapple slices.\n• 1/2 cup butter.\n• 1 cup brown sugar.\n• 1 cup all-purpose flour.\n• 1 cup sugar.\n• 2 tsp baking powder.\n• 1/2 cup milk.\n• 2 eggs.\n• Maraschino cherries (for garnish)",
+            "1. Preheat oven to 350°F (175°C).\n2. Melt butter in a pan and add brown sugar. Arrange pineapple slices on top.\n3. In a bowl, mix flour, sugar, baking powder, milk, and eggs until smooth.\n4. Pour batter over pineapple and bake for 30-35 minutes. Let cool before flipping.",
+            "com/example/images/desserts/pineapple-cake.jpg"
         ));
 
-        recipes.put("Lemon Bars", new Recipe(
-            "Lemon Bars",
-            "55 mins",
+        recipes.put("Kutsinta", new Recipe(
+            "Kutsinta",
+            "1 hour",
             "🍰 Desserts",
-            "• Shortbread crust\n• Lemons\n• Eggs\n• Sugar\n• Flour",
-            "1. Bake crust\n2. Make lemon filling\n3. Bake until set\n4. Dust with sugar"
+            "• 2 cups rice flour.\n• 1 cup brown sugar.\n• 2 cups water.\n• 1 tsp lye water.\n• Grated coconut (for topping)",
+            "1. Mix all ingredients until smooth..\n2. Pour into molds and steam for 30 minutes..\n3. Serve topped with grated coconut.",
+            "com/example/images/desserts/kutsinta.jpg"
         ));
 
-        recipes.put("Ice Cream", new Recipe(
-            "Ice Cream",
-            "40 mins",
+        recipes.put("Buko Pandan Salad", new Recipe(
+            "Buko Pandan Salad",
+            "30 mins",
             "🍰 Desserts",
-            "• Heavy cream\n• Milk\n• Sugar\n• Vanilla\n• Egg yolks",
-            "1. Make custard base\n2. Chill mixture\n3. Churn in machine\n4. Freeze until firm"
+            "• 1 cup young coconut (buko), shredded.\n• 1 pack (8 oz) pandan-flavored gelatin.\n• 1 cup condensed milk.\n• 1 cup all-purpose cream.\n• 1 cup water.\n• 1/2 cup sugar",
+            "1. Prepare gelatin according to package instructions and let cool, then cut into cubes.\n2. In a bowl, mix coconut, gelatin, condensed milk, and cream.\n3. Chill before serving.",
+            "com/example/images/desserts/buko-pandan-salad.jpg"
         ));
 
-        recipes.put("Fruit Tart", new Recipe(
-            "Fruit Tart",
-            "65 mins",
+        recipes.put("Maja Blanca", new Recipe(
+            "Maja Blanca",
+            "1 hour",
             "🍰 Desserts",
-            "• Pastry crust\n• Pastry cream\n• Fresh fruits\n• Glaze",
-            "1. Bake tart shell\n2. Make pastry cream\n3. Arrange fruits\n4. Add glaze"
+            "• 1 can (14 oz) coconut milk.\n• 1 can (12 oz) evaporated milk.\n• 1 cup corn kernels.\n• 1 cup cornstarch.\n• 1 cup sugar.\n• Grated coconut (for topping)",
+            "1. In a pot, mix coconut milk, evaporated milk, sugar, and corn.\n2. Dissolve cornstarch in a small amount of water and add to the mixture.\n3. Stir over low heat until thick. Pour into a mold and let cool. Top with grated coconut.",
+            "com/example/images/desserts/maja-blanca.jpg"
         ));
 
-        recipes.put("Bread Pudding", new Recipe(
-            "Bread Pudding",
-            "55 mins",
+        recipes.put("Turon", new Recipe(
+            "Turon",
+            "30 mins",
             "🍰 Desserts",
-            "• Bread\n• Milk\n• Eggs\n• Sugar\n• Vanilla",
-            "1. Cut bread into cubes\n2. Mix custard\n3. Combine and soak\n4. Bake until golden"
+            "• 4 ripe bananas (saba).\n• 1 cup brown sugar.\n• Lumpia wrappers.\n• Oil (for frying)",
+            "1. Roll each banana in brown sugar and wrap in lumpia wrappers.\n2. Heat oil in a pan and fry until golden brown and crispy.\n3. Drain excess oil and serve.",
+            "com/example/images/desserts/turon.jpg"
         ));
 
+        recipes.put("Halo-Halo", new Recipe(
+            "Halo-Halo",
+            "30 mins",
+            "🍰 Desserts",
+            "• 1 cup crushed ice.\n• 1/2 cup sweetened jackfruit.\n• 1/2 cup sweetened banana.\n• 1/2 cup sweetened beans.\n• 1/2 cup leche flan (cubed).\n• 1/2 cup purple yam (u-be) puree.\n• 1 cup evaporated milk.\n• 1 scoop ice cream (optional)",
+            "1. In a tall glass, layer sweetened fruits and beans.\n2. Add crushed ice on top.\n3. Pour evaporated milk over the ice and top with ice cream if desired.",
+            "com/example/images/desserts/halo-halo.jpg"
+        ));
+
+        recipes.put("Sapin-Sapin", new Recipe(
+            "Sapin-Sapin",
+            "1.5 hours",
+            "🍰 Desserts",
+            "• 2 cups glutinous rice flour.\n• 1 can (14 oz) coconut milk.\n• 1 cup sugar.\n• 1 cup water.\n• 1/2 cup purple yam (u-be) puree.\n• 1/2 cup mung bean (cooked).\n• 1/2 cup grated coconut (for topping)",
+            "1. In a bowl, mix glutinous rice flour, sugar, coconut milk, and water.\n2. Divide batter into three parts. Add purple yam to one, mung bean to another, and leave the third as is.\n3. Layer in a mold and steam for 30-40 minutes. Top with grated coconut and serve.",
+            "com/example/images/desserts/sapin-sapin.jpg"
+        ));
+
+        recipes.put("Puto", new Recipe(
+            "Puto",
+            "1 hour",
+            "🍰 Desserts",
+            "• 2 cups rice flour.\n• 1 cup milk.\n• 1 cup sugar.\n•2 tsp baking powder.\n• 1/2 cup butter (melted).\n• 2 eggs.\n• Cheese slices (for topping)",
+            "1. In a bowl, mix rice flour, sugar, and baking powder.\n2. Add milk, melted butter, and eggs; mix until smooth.\n3. Pour into molds and place a slice of cheese on top.\n4. Steam for 30 minutes until cooked.",
+            "com/example/images/desserts/puto.jpg"
+        )); 
+
+        recipes.put("Bibingka", new Recipe(
+            "Bibingka",
+            "1 hour",
+            "🍰 Desserts",
+            "• 2 cups rice flour.\n• 1 cup coconut milk.\n• 1 cup water.\n• 1 cup sugar.\n• 2 tsp baking powder.\n• 2 eggs.\n• Banana leaves (for lining).\n• Grated coconut (for topping)",
+            "1. Preheat oven to 375°F (190°C).\n2. Mix rice flour, sugar, baking powder, coconut milk, water, and eggs until smooth.\n3. Line baking pans with banana leaves. Pour batter into pans.\n4. Bake for 30-35 minutes. Top with grated coconut before serving.",
+            "com/example/images/desserts/bibingka.jpg"
+        )); 
+
+        recipes.put("Leche Flan", new Recipe(
+            "Leche Flan",
+            "10 mins",
+            "🍰 Desserts",
+            "• 1 cup sugar (for caramel).\n• 1 can (14 oz) sweetened condensed milk.\n• 1 can (12 oz) evaporated milk.\n• 5 egg yolks.\n• 1 tsp vanilla extract",
+            "1. In a saucepan, melt sugar over medium heat until golden brown. Pour into a flan mold.\n2. In a bowl, whisk together condensed milk, evaporated milk, egg yolks, and vanilla.\n3. Pour mixture over caramel in the mold.\n4. Cover with foil and steam for 30-40 minutes. Chill before serving.",
+            "com/example/images/desserts/leche-flan.jpg"
+        ));
+        
         // Beverages (10 recipes)
-        recipes.put("Fruit Smoothie", new Recipe(
-            "Fruit Smoothie",
+        recipes.put("Sago’t Gulaman", new Recipe(
+            "Sago’t Gulaman",
             "10 mins",
             "🥤 Beverages",
-            "• Mixed berries\n• Banana\n• Yogurt\n• Honey\n• Ice",
-            "1. Add all ingredients to blender\n2. Blend until smooth\n3. Adjust thickness\n4. Serve immediately",
-            "/images/beverages/fruit-smoothie.jpg"
+            "• 1 cup sago (tapioca pearls).\n• 1 cup gulaman (agar jelly), cut into cubes.\n• 1 cup brown sugar.\n• 4 cups water.\n• 2-3 pandan leaves",
+            "1. Boil 4 cups of water with pandan leaves. Remove leaves once water is fragrant.\n2. Add sago and cook until translucent (about 15 minutes). Drain and rinse.\n3. In a separate pot, dissolve brown sugar in 1 cup of water to make syrup.\n4. In a glass, layer sago, gulaman, and pour syrup over it. Serve chilled.",
+            "com/example/images/beverages/sago-gulaman.jpg"
         ));
         
-        recipes.put("Iced Coffee", new Recipe(
-            "Iced Coffee",
+        recipes.put("Buko Juice", new Recipe(
+            "Buko Juice",
             "15 mins",
             "🥤 Beverages",
-            "• Strong coffee\n• Ice cubes\n• Milk\n• Sugar syrup",
-            "1. Brew strong coffee\n2. Let cool\n3. Add ice and milk\n4. Sweeten to taste",
-            ""
+            "• 1 cup young coconut (buko), shredded.\n• 1 cup sugar.\n• 1 cup water.\n• 1/2 cup condensed milk.\n• 1 cup all-purpose cream",
+            "1. In a bowl, mix coconut, sugar, and water until sugar dissolves.\n2. Add condensed milk and cream. Chill before serving.",
+            "com/example/images/beverages/buko-juice.jpg"
         ));
 
         recipes.put("Lemonade", new Recipe(
@@ -372,65 +442,116 @@ public class RecipeData {
             "🥤 Beverages",
             "• Lemons\n• Sugar\n• Water\n• Ice\n• Mint (optional)",
             "1. Make sugar syrup\n2. Juice lemons\n3. Combine and dilute\n4. Chill and serve",
-            ""
+            "com/example/images/beverages/lemonade.jpg"
         ));
 
         recipes.put("Hot Chocolate", new Recipe(
             "Hot Chocolate",
             "15 mins",
             "🥤 Beverages",
-            "• Chocolate\n• Milk\n• Cream\n• Sugar\n• Vanilla",
-            "1. Heat milk\n2. Add chocolate\n3. Whisk until smooth\n4. Top with cream"
+            "• 1 cup cocoa powder.\n• 1 cup sugar.\n• 1 cup water.\n• 1/2 cup condensed milk.\n• 1 cup all-purpose cream",
+            "1. In a pot, mix cocoa powder, sugar, and water until sugar dissolves.\n2. Add condensed milk and cream. Simmer until thick. Chill before serving.",
+            "com/example/images/beverages/hot-chocolate.jpg"
         ));
 
-        recipes.put("Green Tea Latte", new Recipe(
-            "Green Tea Latte",
+        recipes.put("Pineapple Juice", new Recipe(
+            "Pineapple Juice",
             "10 mins",
             "🥤 Beverages",
-            "• Matcha powder\n• Hot water\n• Milk\n• Sugar",
-            "1. Whisk matcha with water\n2. Heat and froth milk\n3. Combine\n4. Add sugar if desired"
+            "• 1 ripe pineapple.\n• Water (as needed)",
+            "1. Peel and chop the pineapple.\n2. Blend with water until smooth. Strain if desired. Serve chilled.",
+            "com/example/images/beverages/pineapple-juice.jpg"
         ));
 
-        recipes.put("Mojito Mocktail", new Recipe(
-            "Mojito Mocktail",
+        recipes.put("Milk Tea", new Recipe(
+            "Milk Tea",
             "10 mins",
             "🥤 Beverages",
-            "• Lime\n• Mint leaves\n• Sugar\n• Soda water\n• Ice",
-            "1. Muddle mint and lime\n2. Add sugar and ice\n3. Top with soda\n4. Garnish and serve"
+            "• 2 cups water.\n• 2 black tea bags.\n• 1 cup milk.\n• Sugar (to taste).\n• Tapioca pearls (optional)",
+            "1. Boil water and steep tea bags for 5 minutes.\n2. Remove tea bags and add milk and sugar. Stir well.\n3. Serve hot or cold, adding tapioca pearls if desired.",
+            "com/example/images/beverages/milk-tea.jpg"
         ));
 
         recipes.put("Mango Lassi", new Recipe(
             "Mango Lassi",
             "10 mins",
             "🥤 Beverages",
-            "• Mango pulp\n• Yogurt\n• Sugar\n• Cardamom\n• Ice",
-            "1. Blend mango and yogurt\n2. Add sugar and cardamom\n3. Blend with ice\n4. Serve cold"
+            "• 1 cup mango pulp.\n• 1 cup plain yogurt.\n• 1/2 cup sugar.\n• 1/2 tsp cardamom powder.\n• Ice cubes",
+            "1. Blend mango pulp and yogurt.\n2. Add sugar and cardamom powder.\n3. Blend with ice cubes.\n4. Serve chilled.",
+            "com/example/images/beverages/mango-lasi.jpg"
         ));
 
-        recipes.put("Chai Tea", new Recipe(
-            "Chai Tea",
+        recipes.put("Mango Shake", new Recipe(
+            "Mango Shake",
             "20 mins",
             "🥤 Beverages",
-            "• Black tea\n• Milk\n• Spices\n• Sugar\n• Water",
-            "1. Boil water with spices\n2. Add tea and milk\n3. Simmer gently\n4. Strain and serve"
+            "• 1 ripe mango.\n• 1 cup milk.\n• 1/2 cup sugar.\n• 1/2 tsp cardamom powder.\n• Ice cubes",
+            "1. Blend mango pulp and milk.\n2. Add sugar and cardamom powder.\n3. Blend with ice cubes.\n4. Serve chilled.",
+            "com/example/images/beverages/mango-shake.jpg"
         ));
 
-        recipes.put("Orange Julius", new Recipe(
-            "Orange Julius",
+        recipes.put("Buko Pandan Shake", new Recipe(
+            "Buko Pandan Shake",
             "10 mins",
             "🥤 Beverages",
-            "• Orange juice\n• Milk\n• Vanilla\n• Sugar\n• Ice",
-            "1. Blend juice and milk\n2. Add vanilla and sugar\n3. Blend with ice\n4. Serve frothy"
+            "• 1 cup young coconut (buko), shredded.\n• 1 cup milk.\n• 1/2 cup sugar.\n• 1/2 tsp cardamom powder.\n• Ice cubes",
+            "1. Blend buko and milk.\n2. Add sugar and cardamom powder.\n3. Blend with ice cubes.\n4. Serve chilled.",
+            "com/example/images/beverages/buko-pandan-shake.jpg"
+        ));
+
+        recipes.put("Lemon Basil Drink (Basil Lemonade)", new Recipe(
+            "Lemon Basil Drink (Basil Lemonade)",
+            "10 mins",
+            "🥤 Beverages",
+            "• 1 cup lemon juice (freshly squeezed).\n• 1 cup basil leaves.\n• 1 cup sugar (adjust to taste).\n• 4 cup water.\n• 1/2 cup condensed milk.\n• Ice cubes",
+            "1. In a pot, bring 1 cup of water to a boil and add the basil leaves. Steep for 5 minutes, then strain to remove the leaves.\n2.In a pitcher, combine the basil-infused water, lemon juice, remaining water, and sugar. Stir until the sugar is dissolved.\n3. Serve over ice and garnish with additional basil leaves or lemon slices if desired.",
+            "com/example/images/beverages/lemon-basil-drink.jpg"
         ));
 
         recipes.put("Strawberry Milkshake", new Recipe(
             "Strawberry Milkshake",
             "10 mins",
             "🥤 Beverages",
-            "• Strawberries\n• Vanilla ice cream\n• Milk\n• Whipped cream",
-            "1. Blend strawberries\n2. Add ice cream and milk\n3. Blend until smooth\n4. Top with cream"
+            "• 1 cup strawberries.\n• 1 cup milk.\n• 1/2 cup sugar.\n• 1/2 tsp cardamom powder.\n• Ice cubes",
+            "1. Blend strawberries and milk.\n2. Add sugar and cardamom powder.\n3. Blend with ice cubes.\n4. Serve chilled.",  
+            "com/example/images/beverages/strawberry-milkshake.jpg"
         ));
 
+        recipes.put("Fruit Shake", new Recipe(
+            "Fruit Shake",
+            "10 mins",
+            "🥤 Beverages",
+            "• 1 banana.\n• 1 cup mixed fruits (mango, pineapple, etc.).\n• 1 cup yogurt or milk.\n• Ice",
+            "1. Blend all ingredients until smooth.\n2. Serve chilled.",
+            "com/example/images/beverages/mango-smoothie.jpg"
+        ));
+
+        recipes.put("Strawberry Smoothie", new Recipe(
+            "Strawberry Smoothie",
+            "10 mins",
+            "🥤 Beverages",
+            "• 1 cup strawberries.\n• 1 cup milk.\n• 1/2 cup sugar.\n• 1/2 tsp cardamom powder.\n• Ice cubes",
+            "1. Blend strawberries and milk.\n2. Add sugar and cardamom powder.\n3. Blend with ice cubes.\n4. Serve chilled.",
+            "com/example/images/beverages/strawberry-smoothie.jpg"
+        ));
+
+        recipes.put("Choco Banana Smoothie", new Recipe(
+            "Choco Banana Smoothie",
+            "10 mins",
+            "🥤 Beverages",
+            "• 1 ripe banana.\n• 1 cup milk.\n• 1/2 cup sugar.\n• 1/2 tsp cardamom powder.\n• Ice cubes",
+            "1. Blend banana and milk.\n2. Add sugar and cardamom powder.\n3. Blend with ice cubes.\n4. Serve chilled.",    
+            "com/example/images/beverages/choco-banana-smoothie.jpg"
+        ));
+
+        recipes.put("Soursop Juice (Guyabano Juice)", new Recipe(
+            "Soursop Juice (Guyabano Juice)",
+            "10 mins",
+            "🥤 Beverages",
+            "• 1 ripe soursop.\n• 1 cup milk.\n• 1/2 cup sugar.\n• 1/2 tsp cardamom powder.\n• Ice cubes",
+            "1. Blend soursop and milk.\n2. Add sugar and cardamom powder.\n3. Blend with ice cubes.\n4. Serve chilled.",
+            "com/example/images/beverages/soursop-juice.jpg"
+        ));
         return recipes;
     }
 }
