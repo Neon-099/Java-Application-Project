@@ -45,7 +45,7 @@ public class RecipeManager extends Application {
         root.setCenter(scrollPane);
         
         // Create the scene
-        Scene scene = new Scene(root, 1220, 700);
+        Scene scene = new Scene(root, 1000, 700);
         primaryStage.setTitle("Recipe Manager");
         primaryStage.setScene(scene);
         primaryStage.show();

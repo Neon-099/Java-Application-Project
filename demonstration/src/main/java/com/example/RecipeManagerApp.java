@@ -47,10 +47,12 @@ public class RecipeManagerApp extends Application {
         
         // Top header
         HBox header = createHeader();
+        
         root.setTop(header);
         
         // Left sidebar
         VBox sidebar = createSidebar();
+        sidebar.setStyle("-fx-background-color: orange");
         root.setLeft(sidebar);
         
         // Center content - Recipe cards
@@ -62,10 +64,11 @@ public class RecipeManagerApp extends Application {
         
         // Footer
         HBox footer = createFooter();
+        footer.setStyle("-fx-background-color: #3a3f44");
         root.setBottom(footer);
         
         // Create the scene
-        Scene scene = new Scene(root, 1220, 700);
+        Scene scene = new Scene(root, 1000, 700);
         primaryStage.setTitle("Recipe Manager");
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -74,7 +77,7 @@ public class RecipeManagerApp extends Application {
     private HBox createHeader() {
         HBox header = new HBox();
         header.setPadding(new Insets(15, 25, 15, 25));
-        header.setStyle("-fx-background-color: white; -fx-border-color: #e0e0e0; -fx-border-width: 0 0 1 0;");
+        header.setStyle("-fx-background-color: orange; -fx-border-width: 0 0 1 0;");
         header.setAlignment(Pos.CENTER_LEFT);
         
         // Logo
@@ -263,55 +266,56 @@ public class RecipeManagerApp extends Application {
     }
     
     private VBox createRecipeCard(String recipeName, String time, String category) {
-        VBox card = new VBox(5);
+        VBox card = new VBox(0); // Reduce spacing between image and content
         card.setStyle("-fx-background-color: white; -fx-border-radius: 5; -fx-background-radius: 5; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 4, 0, 0, 2);");
         
-        // Adjust the card width here - you can change this value
-        card.setPrefWidth(150);
-        // You can also set a min and max width if needed
-        card.setMinWidth(300);
-        card.setMaxWidth(300);
+        // Adjust the card width to better fit the layout
+        card.setPrefWidth(220);
+        card.setMinWidth(220);
+        card.setMaxWidth(220);
         
-        // Image container
+        // Image container - make it fill the card width completely
         ImageView imageView = createRecipeImageView(recipeName);
         
-        // Set the size of the image to match the card width
-        imageView.setFitWidth(1000);
-        // Adjust the image height - you can change this value
-        imageView.setFitHeight(150);
-        imageView.setPreserveRatio(true);
-        imageView.setSmooth(true);
+        // Set the image to fill the entire width of the card
+        imageView.setFitWidth(220);
+        imageView.setFitHeight(170);
+        imageView.setPreserveRatio(false); // Allow image to stretch to fill space
         
-        // Recipe info
-        VBox recipeInfo = new VBox(3);
-        recipeInfo.setPadding(new Insets(8, 12, 12, 12));
+        // Recipe info - reduce padding to minimize white space
+        VBox recipeInfo = new VBox(2); // Reduce spacing between elements
+        recipeInfo.setPadding(new Insets(8, 10, 8, 10)); // Reduce padding
         
         Label nameLabel = new Label(recipeName);
-        nameLabel.setFont(Font.font("Arial", FontWeight.BOLD, 14)); // Slightly smaller font
+        nameLabel.setFont(Font.font("Arial", FontWeight.BOLD, 14));
         nameLabel.setWrapText(true);
+        nameLabel.setPrefHeight(40); // Fixed height for title to ensure consistent card height
         
-        HBox metaInfo = new HBox(10);
-        metaInfo.setPadding(new Insets(3, 0, 5, 0));
+        // Meta info with more compact layout
+        HBox metaInfo = new HBox(8); // Reduce spacing
+        metaInfo.setPadding(new Insets(0, 0, 2, 0)); // Minimal padding
         
         Label timeInfo = new Label("🕒 " + time);
-        timeInfo.setFont(Font.font("Arial", 12)); // Smaller font
+        timeInfo.setFont(Font.font("Arial", 11));
+        
+        // Make the category text smaller
         Label categoryInfo = new Label(category);
-        categoryInfo.setFont(Font.font("Arial", 12)); // Smaller font
+        categoryInfo.setFont(Font.font("Arial", 11));
         
         metaInfo.getChildren().addAll(timeInfo, categoryInfo);
         
-        // Action buttons
+        // Action buttons in a more compact layout
         HBox actions = new HBox(5);
         actions.setPrefWidth(Double.MAX_VALUE);
         actions.setAlignment(Pos.CENTER_LEFT);
         
         Button viewButton = new Button("👁️ View");
         viewButton.setStyle("-fx-background-color: transparent; -fx-padding: 2 5;");
-        viewButton.setFont(Font.font("Arial", 12));
+        viewButton.setFont(Font.font("Arial", 11));
         
         Button planMealButton = new Button("📅 Plan");
         planMealButton.setStyle("-fx-background-color: transparent; -fx-padding: 2 5;");
-        planMealButton.setFont(Font.font("Arial", 12));
+        planMealButton.setFont(Font.font("Arial", 11));
         
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
@@ -330,10 +334,13 @@ public class RecipeManagerApp extends Application {
     }
     
     private FlowPane createFlowPane(double spacing) {
-        // You can adjust the spacing between cards here
+        // Reduce spacing between cards to allow more cards to fit
         FlowPane flowPane = new FlowPane(spacing, spacing);
-        // Adjust the wrapping width based on your window size
-        flowPane.setPrefWrapLength(1100);
+        // Set a hgap and vgap directly
+        flowPane.setHgap(10);
+        flowPane.setVgap(15);
+        // Make the cards flow better by adjusting wrap length
+        flowPane.setPrefWrapLength(1000);
         flowPane.setAlignment(Pos.TOP_LEFT);
         return flowPane;
     }
@@ -402,9 +409,10 @@ public class RecipeManagerApp extends Application {
         HBox footer = new HBox();
         footer.setAlignment(Pos.CENTER);
         footer.setPadding(new Insets(15));
-        footer.setStyle("-fx-background-color: white; -fx-border-color: #e0e0e0; -fx-border-width: 1 0 0 0;");
+        footer.setStyle("-fx-background-color: #3a3f44; -fx-border-width: 1 0 0 0;");
         
-        Label copyrightLabel = new Label("© 2025 Recipe Manager. All rights reserved.");
+        Label copyrightLabel = new Label("© 2025 Recipe Manager.");
+        copyrightLabel.setStyle("-fx-text-fill: white;");
         footer.getChildren().add(copyrightLabel);
         
         return footer;
@@ -583,7 +591,7 @@ public class RecipeManagerApp extends Application {
             }
             
             VBox recipeCard = createRecipeCard(recipe.name, recipe.time, recipe.category);
-            recipeCard.setPrefWidth(300);
+            recipeCard.setPrefWidth(220); // Use consistent width
             targetFlow.getChildren().add(recipeCard);
             
             // Add flow pane to section if not empty
