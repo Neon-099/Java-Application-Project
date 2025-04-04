@@ -52,7 +52,7 @@ public class RecipeManagerApp extends Application {
         
         // Left sidebar
         VBox sidebar = createSidebar();
-        sidebar.setStyle("-fx-background-color: orange");
+        sidebar.setStyle("-fx-background-color: #FFA53F");
         root.setLeft(sidebar);
         
         // Center content - Recipe cards
@@ -64,7 +64,6 @@ public class RecipeManagerApp extends Application {
         
         // Footer
         HBox footer = createFooter();
-        footer.setStyle("-fx-background-color: #3a3f44");
         root.setBottom(footer);
         
         // Create the scene
@@ -77,7 +76,7 @@ public class RecipeManagerApp extends Application {
     private HBox createHeader() {
         HBox header = new HBox();
         header.setPadding(new Insets(15, 25, 15, 25));
-        header.setStyle("-fx-background-color: orange; -fx-border-width: 0 0 1 0;");
+        header.setStyle("-fx-background-color: #FFA53F; -fx-border-width: 0 0 1 0;");
         header.setAlignment(Pos.CENTER_LEFT);
         
         // Logo
@@ -531,7 +530,7 @@ public class RecipeManagerApp extends Application {
         // Create a map for filtered recipes
         Map<String, Recipe> filteredRecipes = new HashMap<>();
         
-        // Search through all recipes
+        // Search through all recipes using contains() instead of regex matching
         for (Recipe recipe : recipeData.values()) {
             if (recipe.name.toLowerCase().contains(query) ||
                 recipe.ingredients.toLowerCase().contains(query) ||

@@ -54,7 +54,7 @@ public class RecipeManager extends Application {
     private HBox createHeader() {
         HBox header = new HBox();
         header.setPadding(new Insets(10));
-        header.setStyle("-fx-background-color: beige brown;");
+        header.setStyle("-fx-background-color: #FFA53F;");
         header.setAlignment(Pos.CENTER_LEFT);
         
         // App icon and name
