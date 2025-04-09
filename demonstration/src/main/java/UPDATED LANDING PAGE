@@ -1,0 +1,242 @@
+package com.example;
+
+import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.stage.Stage;
+import javafx.scene.image.ImageView;
+
+public class RecipeManager extends Application {
+
+    // Colors
+    private final Color ORANGE_BG = Color.rgb(255, 159, 67);
+    private final Color LIGHT_ORANGE_BG = Color.rgb(255, 240, 230);
+    private final Color DARK_GRAY = Color.rgb(51, 51, 51);
+    private final Color LIGHT_GRAY = Color.rgb(245, 245, 245);
+    private final Color WHITE = Color.rgb(255, 255, 255);
+    private final Color DARK_TEXT = Color.rgb(51, 51, 51);
+    private final Color MEDIUM_TEXT = Color.rgb(102, 102, 102);
+
+    @Override
+    public void start(Stage primaryStage) {
+        // Main container
+        VBox root = new VBox();
+        root.setBackground(new Background(new BackgroundFill(LIGHT_GRAY, CornerRadii.EMPTY, Insets.EMPTY)));
+        
+        // Add header
+        HBox header = createHeader();
+        
+        // Create content section
+        HBox contentSection = createContentSection();
+        
+        // Create footer
+        HBox footer = createFooter();
+        
+        // Add all sections to root
+        root.getChildren().addAll(header, contentSection, footer);
+        
+        // Create scene
+        Scene scene = new Scene(root, 900, 600);
+        
+        // Set stage properties
+        primaryStage.setTitle("Recipe Manager");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+    
+    private HBox createHeader() {
+        HBox header = new HBox();
+        header.setPrefHeight(70);
+        header.setBackground(new Background(new BackgroundFill(ORANGE_BG, CornerRadii.EMPTY, Insets.EMPTY)));
+        header.setPadding(new Insets(15, 20, 15, 20));
+        header.setAlignment(Pos.CENTER_LEFT);
+        header.setSpacing(15);
+        
+        // Logo/Title
+        HBox logoBox = new HBox(5);
+        logoBox.setAlignment(Pos.CENTER_LEFT);
+        
+        Label forkKnifeIcon = new Label("🍴");
+        forkKnifeIcon.setFont(Font.font("Arial", FontWeight.BOLD, 24));
+        forkKnifeIcon.setTextFill(DARK_TEXT);
+        
+        Label titleLabel = new Label("Recipe Manager");
+        titleLabel.setFont(Font.font("Arial", FontWeight.BOLD, 24));
+        titleLabel.setTextFill(DARK_TEXT);
+        
+        logoBox.getChildren().addAll(forkKnifeIcon, titleLabel);
+        
+        
+        // // Login button
+        // Button loginButton = new Button("Login");
+        // loginButton.setPrefSize(100, 40);
+        // loginButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        // loginButton.setStyle(
+        //         "-fx-background-color: rgba(255, 255, 255, 0.3);" +
+        //         "-fx-text-fill: #333333;" +
+        //         "-fx-background-radius: 20;" +
+        //         "-fx-cursor: hand;"
+        // );
+        
+        // // Sign Up button
+        // Button signUpButton = new Button("Sign Up");
+        // signUpButton.setPrefSize(100, 40);
+        // signUpButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        // signUpButton.setStyle(
+        //         "-fx-background-color: #333333;" +
+        //         "-fx-text-fill: white;" +
+        //         "-fx-background-radius: 20;" +
+        //         "-fx-cursor: hand;"
+        // );
+        
+        // Add buttons with spacers for alignment
+        Region spacer = new Region();
+        HBox.setHgrow(spacer, Priority.ALWAYS);
+        
+        header.getChildren().addAll(logoBox, spacer);
+        
+        return header;
+    }
+    
+    private HBox createContentSection() {
+        HBox contentSection = new HBox(20);
+        contentSection.setPadding(new Insets(20, 20, 20, 20));
+        contentSection.setAlignment(Pos.CENTER);
+        contentSection.setBackground(new Background(new BackgroundFill(LIGHT_GRAY, CornerRadii.EMPTY, Insets.EMPTY)));
+        
+        // Left panel - Kitchen Image and Text
+        VBox leftPanel = new VBox(20);
+        leftPanel.setAlignment(Pos.CENTER_LEFT);
+        leftPanel.setPadding(new Insets(30, 30, 30, 30));
+        leftPanel.setPrefWidth(450);
+        leftPanel.setBackground(new Background(new BackgroundFill(LIGHT_ORANGE_BG, new CornerRadii(10), Insets.EMPTY)));
+        
+        // Kitchen image placeholder
+        ImageView imageView = new ImageView("https://www.seriouseats.com/thmb/BBksd7FXnrkxFa8Dipf_LmgP9HA=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Filipino-Features-Hero-Final-2-b785e627967843b0aa631c6a977adabe.jpg");
+        imageView.setFitWidth(350);
+        imageView.setFitHeight(200);
+        
+        // Heading
+        Label headingLabel = new Label("Your Kitchen, Organized");
+        headingLabel.setFont(Font.font("Arial", FontWeight.BOLD, 30));
+        headingLabel.setTextFill(DARK_TEXT);
+        
+        // Subheading
+        Label subheadingLabel = new Label("Save time planning meals and organizing your favorite recipes.");
+        subheadingLabel.setFont(Font.font("Arial", 16));
+        subheadingLabel.setTextFill(MEDIUM_TEXT);
+        subheadingLabel.setWrapText(true);
+        
+        // Get Started button
+        Button getStartedButton = new Button("Get Started");
+        getStartedButton.setPrefSize(180, 50);
+        getStartedButton.setFont(Font.font("Arial", FontWeight.BOLD, 18));
+        getStartedButton.setStyle(
+                "-fx-background-color: #FF9F43;" +
+                "-fx-text-fill: white;" +
+                "-fx-background-radius: 25;" +
+                "-fx-cursor: hand;"
+        );
+        
+        //FUNCTIONALITY / EVENT HANDLER 
+        getStartedButton.setOnAction(event -> {
+            //CLOSING THE CURRENT WINDOW
+            Stage currentStage = (Stage) getStartedButton.getScene().getWindow();
+            currentStage.close();
+
+            //LAUNCH THE RECIPE MANAGER APP
+            RecipeManagerApp app = new RecipeManagerApp();
+            Stage newStage = new Stage ();
+            app.start(newStage); 
+        });
+
+        // Add components to left panel
+        leftPanel.getChildren().addAll(imageView, headingLabel, subheadingLabel, getStartedButton);
+        
+        // Right panel - Why Choose Us
+        VBox rightPanel = new VBox(20);
+        rightPanel.setAlignment(Pos.TOP_LEFT);
+        rightPanel.setPadding(new Insets(30, 30, 30, 30));
+        rightPanel.setPrefWidth(450);
+        rightPanel.setBackground(new Background(new BackgroundFill(WHITE, new CornerRadii(10), Insets.EMPTY)));
+        
+        Label featureHeadingLabel = new Label("Key Features");
+        featureHeadingLabel.setFont(Font.font("Arial", FontWeight.BOLD, 30));
+        featureHeadingLabel.setTextFill(DARK_TEXT);
+        
+        // Features
+        VBox featuresBox = new VBox(20);
+        featuresBox.getChildren().addAll(
+                createFeatureItem("1", "Recipe Organization", "Categorize and search your recipes with ease."),
+                createFeatureItem("2", "Meal Planning", "Plan your weekly meals and generate shopping lists."),
+                createFeatureItem("3", "Cook Mode", "Step-by-step cooking instructions with timers.")
+        );
+        
+        rightPanel.getChildren().addAll(featureHeadingLabel, featuresBox);
+        
+        contentSection.getChildren().addAll(leftPanel, rightPanel);
+        
+        return contentSection;
+    }
+    
+    private HBox createFeatureItem(String number, String title, String description) {
+        HBox featureItem = new HBox(15);
+        featureItem.setAlignment(Pos.CENTER_LEFT);
+        
+        // Number circle
+        StackPane numberCircle = new StackPane();
+        Circle circle = new Circle(20, LIGHT_ORANGE_BG);
+        
+        Label numberLabel = new Label(number);
+        numberLabel.setFont(Font.font("Arial", FontWeight.BOLD, 18));
+        numberLabel.setTextFill(ORANGE_BG);
+        
+        numberCircle.getChildren().addAll(circle, numberLabel);
+        
+        // Feature text
+        VBox featureText = new VBox(5);
+        Label titleLabel = new Label(title);
+        titleLabel.setFont(Font.font("Arial", FontWeight.BOLD, 18));
+        titleLabel.setTextFill(DARK_TEXT);
+        
+        Label descLabel = new Label(description);
+        descLabel.setFont(Font.font("Arial", 14));
+        descLabel.setTextFill(MEDIUM_TEXT);
+        descLabel.setWrapText(true);
+        
+        featureText.getChildren().addAll(titleLabel, descLabel);
+        
+        featureItem.getChildren().addAll(numberCircle, featureText);
+        
+        return featureItem;
+    }
+    
+    private HBox createFooter() {
+        HBox footer = new HBox();
+        footer.setPrefHeight(40);
+        footer.setAlignment(Pos.CENTER);
+        footer.setBackground(new Background(new BackgroundFill(DARK_GRAY, CornerRadii.EMPTY, Insets.EMPTY)));
+        
+        Label copyrightLabel = new Label("© 2025 Recipe Manager");
+        copyrightLabel.setFont(Font.font("Arial", 12));
+        copyrightLabel.setTextFill(WHITE);
+        
+        footer.getChildren().add(copyrightLabel);
+        
+        return footer;
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
+
+    
