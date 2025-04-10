@@ -67,7 +67,7 @@ public class RecipeManagerApp extends Application {
         root.setBottom(footer);
         
         // Create the scene
-        Scene scene = new Scene(root, 1000, 700);
+        Scene scene = new Scene(root, 1400, 700);
         primaryStage.setTitle("Recipe Manager");
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -269,16 +269,16 @@ public class RecipeManagerApp extends Application {
         card.setStyle("-fx-background-color: white; -fx-border-radius: 5; -fx-background-radius: 5; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 4, 0, 0, 2);");
         
         // Adjust the card width to better fit the layout
-        card.setPrefWidth(220);
-        card.setMinWidth(220);
-        card.setMaxWidth(220);
+        card.setPrefWidth(400);
+        card.setMinWidth(320);
+        card.setMaxWidth(320);
         
         // Image container - make it fill the card width completely
         ImageView imageView = createRecipeImageView(recipeName);
         
         // Set the image to fill the entire width of the card
-        imageView.setFitWidth(220);
-        imageView.setFitHeight(170);
+        imageView.setFitWidth(320);
+        imageView.setFitHeight(200);
         imageView.setPreserveRatio(false); // Allow image to stretch to fill space
         
         // Recipe info - reduce padding to minimize white space
@@ -346,10 +346,10 @@ public class RecipeManagerApp extends Application {
         // Reduce spacing between cards to allow more cards to fit
         FlowPane flowPane = new FlowPane(spacing, spacing);
         // Set a hgap and vgap directly
-        flowPane.setHgap(10);
-        flowPane.setVgap(15);
+        flowPane.setHgap(18);
+        flowPane.setVgap(18);
         // Make the cards flow better by adjusting wrap length
-        flowPane.setPrefWrapLength(1000);
+        flowPane.setPrefWrapLength(1200); // Match the scene width
         flowPane.setAlignment(Pos.TOP_LEFT);
         return flowPane;
     }
@@ -357,9 +357,9 @@ public class RecipeManagerApp extends Application {
     //IMAGES HANDLING
     private ImageView createRecipeImageView(String recipeName) {
         ImageView imageView = new ImageView();
-        imageView.setFitWidth(350);
-        imageView.setFitHeight(200);
-        imageView.setPreserveRatio(true);
+        imageView.setFitWidth(450);  // Match the card width
+        imageView.setFitHeight(250); // Fixed height for consistency
+        imageView.setPreserveRatio(false); // Allow image to stretch to fill space
         imageView.setSmooth(true);
 
         Recipe recipe = recipeData.get(recipeName);
@@ -529,6 +529,112 @@ public class RecipeManagerApp extends Application {
         });
     }
     
+
+        //EDIT RECIPE HANDLING
+    private void handleEditRecipe(String recipeName) {
+        Recipe recipe = recipeData.get(recipeName);
+        if (recipe == null) return;
+
+        Dialog<Recipe> dialog = new Dialog<>();
+        dialog.setTitle("Edit Recipe");
+        dialog.setHeaderText(null);
+
+        ButtonType saveButtonType = new ButtonType("Save", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(saveButtonType, ButtonType.CANCEL);
+
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(20));
+
+        TextField nameField = new TextField(recipe.name);
+        TextField timeField = new TextField(recipe.time);
+        TextField imageUrlField = new TextField(recipe.imageUrl != null ? recipe.imageUrl : "");
+        TextArea ingredientsArea = new TextArea(recipe.ingredients);
+        TextArea instructionsArea = new TextArea(recipe.instructions);
+
+        ingredientsArea.setPrefRowCount(4);
+        instructionsArea.setPrefRowCount(4);
+
+        // Style headers
+        Label ingredientsHeader = new Label("Ingredients");
+        ingredientsHeader.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        Label instructionsHeader = new Label("Instructions");
+        instructionsHeader.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+
+        grid.add(new Label("Recipe Name:"), 0, 0);
+        grid.add(nameField, 1, 0);
+        grid.add(new Label("Cooking Time:"), 0, 1);
+        grid.add(timeField, 1, 1);
+        grid.add(new Label("Image URL (optional):"), 0, 2);
+        grid.add(imageUrlField, 1, 2);
+        grid.add(ingredientsHeader, 0, 3, 2, 1);
+        grid.add(ingredientsArea, 0, 4, 2, 1);
+        grid.add(instructionsHeader, 0, 5, 2, 1);
+        grid.add(instructionsArea, 0, 6, 2, 1);
+
+        dialog.getDialogPane().setContent(grid);
+
+        // Set the result converter
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == saveButtonType) {
+                return new Recipe(
+                    nameField.getText(),
+                    timeField.getText(),
+                    recipe.category, // Keep the same category
+                    ingredientsArea.getText(),
+                    instructionsArea.getText(),
+                    imageUrlField.getText().trim().isEmpty() ? null : imageUrlField.getText().trim()
+                );
+            }
+            return null;
+        });
+
+        // Show the dialog and handle the result
+        dialog.showAndWait().ifPresent(updatedRecipe -> {
+            // Remove the old recipe
+            recipeData.remove(recipeName);
+            // Add the updated recipe
+            recipeData.put(updatedRecipe.name, updatedRecipe);
+            
+            // Refresh the recipe display
+            refreshRecipeDisplay(recipeData);
+        });
+    }
+
+    //DELETE RECIPE HANDLING
+    private void handleDeleteRecipe(String recipeName) {
+        // Create confirmation dialog
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Delete Recipe");
+        alert.setHeaderText("Are you sure you want to delete this recipe?");
+        alert.setContentText("This action cannot be undone.");
+        
+        // Customize the buttons
+        ButtonType deleteButton = new ButtonType("Delete", ButtonBar.ButtonData.OK_DONE);
+        ButtonType cancelButton = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+        alert.getButtonTypes().setAll(deleteButton, cancelButton);
+        
+        // Show the dialog and handle the result
+        alert.showAndWait().ifPresent(buttonType -> {
+            if (buttonType == deleteButton) {
+                // Remove the recipe from the data map
+                recipeData.remove(recipeName);
+                
+                // Remove the recipe from any meal plans
+                for (List<Recipe> dayMeals : mealPlans.values()) {
+                    dayMeals.removeIf(r -> r.name.equals(recipeName));
+                }
+                
+                // Refresh the display
+                refreshRecipeDisplay(recipeData);
+                
+                // Show success message
+                showAlert("Recipe Deleted", "The recipe has been successfully deleted.");
+            }
+        });
+    }
+
     //SEARCH HANDLING
     private void handleSearch(String query) {
         if (query == null || query.trim().isEmpty()) {
@@ -617,7 +723,7 @@ public class RecipeManagerApp extends Application {
             }
             
             VBox recipeCard = createRecipeCard(recipe.name, recipe.time, recipe.category);
-            recipeCard.setPrefWidth(220); // Use consistent width
+            recipeCard.setPrefWidth(500); // Use consistent width (changing this will change the width of the cards)
             targetFlow.getChildren().add(recipeCard);
             
             // Add flow pane to section if not empty
@@ -978,109 +1084,6 @@ public class RecipeManagerApp extends Application {
             }
         }
         return null;
-    }
-
-    private void handleEditRecipe(String recipeName) {
-        Recipe recipe = recipeData.get(recipeName);
-        if (recipe == null) return;
-
-        Dialog<Recipe> dialog = new Dialog<>();
-        dialog.setTitle("Edit Recipe");
-        dialog.setHeaderText(null);
-
-        ButtonType saveButtonType = new ButtonType("Save", ButtonBar.ButtonData.OK_DONE);
-        dialog.getDialogPane().getButtonTypes().addAll(saveButtonType, ButtonType.CANCEL);
-
-        GridPane grid = new GridPane();
-        grid.setHgap(10);
-        grid.setVgap(10);
-        grid.setPadding(new Insets(20));
-
-        TextField nameField = new TextField(recipe.name);
-        TextField timeField = new TextField(recipe.time);
-        TextField imageUrlField = new TextField(recipe.imageUrl != null ? recipe.imageUrl : "");
-        TextArea ingredientsArea = new TextArea(recipe.ingredients);
-        TextArea instructionsArea = new TextArea(recipe.instructions);
-
-        ingredientsArea.setPrefRowCount(4);
-        instructionsArea.setPrefRowCount(4);
-
-        // Style headers
-        Label ingredientsHeader = new Label("Ingredients");
-        ingredientsHeader.setFont(Font.font("Arial", FontWeight.BOLD, 14));
-        Label instructionsHeader = new Label("Instructions");
-        instructionsHeader.setFont(Font.font("Arial", FontWeight.BOLD, 14));
-
-        grid.add(new Label("Recipe Name:"), 0, 0);
-        grid.add(nameField, 1, 0);
-        grid.add(new Label("Cooking Time:"), 0, 1);
-        grid.add(timeField, 1, 1);
-        grid.add(new Label("Image URL (optional):"), 0, 2);
-        grid.add(imageUrlField, 1, 2);
-        grid.add(ingredientsHeader, 0, 3, 2, 1);
-        grid.add(ingredientsArea, 0, 4, 2, 1);
-        grid.add(instructionsHeader, 0, 5, 2, 1);
-        grid.add(instructionsArea, 0, 6, 2, 1);
-
-        dialog.getDialogPane().setContent(grid);
-
-        // Set the result converter
-        dialog.setResultConverter(dialogButton -> {
-            if (dialogButton == saveButtonType) {
-                return new Recipe(
-                    nameField.getText(),
-                    timeField.getText(),
-                    recipe.category, // Keep the same category
-                    ingredientsArea.getText(),
-                    instructionsArea.getText(),
-                    imageUrlField.getText().trim().isEmpty() ? null : imageUrlField.getText().trim()
-                );
-            }
-            return null;
-        });
-
-        // Show the dialog and handle the result
-        dialog.showAndWait().ifPresent(updatedRecipe -> {
-            // Remove the old recipe
-            recipeData.remove(recipeName);
-            // Add the updated recipe
-            recipeData.put(updatedRecipe.name, updatedRecipe);
-            
-            // Refresh the recipe display
-            refreshRecipeDisplay(recipeData);
-        });
-    }
-
-    private void handleDeleteRecipe(String recipeName) {
-        // Create confirmation dialog
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Delete Recipe");
-        alert.setHeaderText("Are you sure you want to delete this recipe?");
-        alert.setContentText("This action cannot be undone.");
-        
-        // Customize the buttons
-        ButtonType deleteButton = new ButtonType("Delete", ButtonBar.ButtonData.OK_DONE);
-        ButtonType cancelButton = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
-        alert.getButtonTypes().setAll(deleteButton, cancelButton);
-        
-        // Show the dialog and handle the result
-        alert.showAndWait().ifPresent(buttonType -> {
-            if (buttonType == deleteButton) {
-                // Remove the recipe from the data map
-                recipeData.remove(recipeName);
-                
-                // Remove the recipe from any meal plans
-                for (List<Recipe> dayMeals : mealPlans.values()) {
-                    dayMeals.removeIf(r -> r.name.equals(recipeName));
-                }
-                
-                // Refresh the display
-                refreshRecipeDisplay(recipeData);
-                
-                // Show success message
-                showAlert("Recipe Deleted", "The recipe has been successfully deleted.");
-            }
-        });
     }
 
     public static void main(String[] args) {
