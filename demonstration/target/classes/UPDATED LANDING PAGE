@@ -17,17 +17,16 @@ import javafx.scene.image.ImageView;
 public class RecipeManager extends Application {
 
     // Colors
-    private static final Color ORANGE_BG = Color.rgb(255, 165, 0);
-    private static final Color LIGHT_ORANGE_BG = Color.rgb(255, 240, 230);
-    private static final Color DARK_GRAY = Color.rgb(51, 51, 51);
-    private static final Color LIGHT_GRAY = Color.rgb(245, 245, 245);
-    private static final Color WHITE = Color.rgb(255, 255, 255);
-    private static final Color DARK_TEXT = Color.rgb(51, 51, 51);
-    private static final Color MEDIUM_TEXT = Color.rgb(102, 102, 102);
-    private Stage primaryStage;
+    private final Color ORANGE_BG = Color.rgb(255, 159, 67);
+    private final Color LIGHT_ORANGE_BG = Color.rgb(255, 240, 230);
+    private final Color DARK_GRAY = Color.rgb(51, 51, 51);
+    private final Color LIGHT_GRAY = Color.rgb(245, 245, 245);
+    private final Color WHITE = Color.rgb(255, 255, 255);
+    private final Color DARK_TEXT = Color.rgb(51, 51, 51);
+    private final Color MEDIUM_TEXT = Color.rgb(102, 102, 102);
+
     @Override
     public void start(Stage primaryStage) {
-        this.primaryStage = primaryStage;
         // Main container
         VBox root = new VBox();
         root.setBackground(new Background(new BackgroundFill(LIGHT_GRAY, CornerRadii.EMPTY, Insets.EMPTY)));
@@ -75,48 +74,34 @@ public class RecipeManager extends Application {
         
         logoBox.getChildren().addAll(forkKnifeIcon, titleLabel);
         
+        
+        // // Login button
+        // Button loginButton = new Button("Login");
+        // loginButton.setPrefSize(100, 40);
+        // loginButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        // loginButton.setStyle(
+        //         "-fx-background-color: rgba(255, 255, 255, 0.3);" +
+        //         "-fx-text-fill: #333333;" +
+        //         "-fx-background-radius: 20;" +
+        //         "-fx-cursor: hand;"
+        // );
+        
+        // // Sign Up button
+        // Button signUpButton = new Button("Sign Up");
+        // signUpButton.setPrefSize(100, 40);
+        // signUpButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        // signUpButton.setStyle(
+        //         "-fx-background-color: #333333;" +
+        //         "-fx-text-fill: white;" +
+        //         "-fx-background-radius: 20;" +
+        //         "-fx-cursor: hand;"
+        // );
+        
         // Add buttons with spacers for alignment
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
         
-        // Login button
-        Button loginButton = new Button("Login");
-        loginButton.setPrefSize(100, 40);
-        loginButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
-        loginButton.setStyle(
-                "-fx-background-color: rgba(255, 255, 255, 0.3);" +
-                "-fx-text-fill: #333333;" +
-                "-fx-background-radius: 20;" +
-                "-fx-cursor: hand;"
-        );
-        
-        // Sign Up button
-        Button signUpButton = new Button("Sign Up");
-        signUpButton.setPrefSize(100, 40);
-        signUpButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
-        signUpButton.setStyle(
-                "-fx-background-color: #333333;" +
-                "-fx-text-fill: white;" +
-                "-fx-background-radius: 20;" +
-                "-fx-cursor: hand;"
-        );
-        
-        // Add event handlers for login and signup buttons
-        loginButton.setOnAction(event -> {
-            Stage loginStage = new Stage();
-            loginStage.initOwner(primaryStage); // Set the main window as owner
-            LoginSignupPage loginPage = new LoginSignupPage();
-            loginPage.showLoginPage(loginStage);
-        });
-        
-        signUpButton.setOnAction(event -> {
-            Stage signupStage = new Stage();
-            signupStage.initOwner(primaryStage); // Set the main window as owner
-            LoginSignupPage signupPage = new LoginSignupPage();
-            signupPage.showSignupPage(signupStage);
-        });
-        
-        header.getChildren().addAll(logoBox, spacer, loginButton, signUpButton);
+        header.getChildren().addAll(logoBox, spacer);
         
         return header;
     }
@@ -150,7 +135,7 @@ public class RecipeManager extends Application {
         subheadingLabel.setTextFill(MEDIUM_TEXT);
         subheadingLabel.setWrapText(true);
         
-        // GET STARTED BUTTON
+        // Get Started button
         Button getStartedButton = new Button("Get Started");
         getStartedButton.setPrefSize(180, 50);
         getStartedButton.setFont(Font.font("Arial", FontWeight.BOLD, 18));
@@ -190,8 +175,9 @@ public class RecipeManager extends Application {
         // Features
         VBox featuresBox = new VBox(20);
         featuresBox.getChildren().addAll(
-                createFeatureItem("1", "Recipe Organization", "Categorize(add or edit) and search your recipes with ease."),
-                createFeatureItem("2", "Meal Planning", "Plan your weekly meals and generate shopping lists.")
+                createFeatureItem("1", "Recipe Organization", "Categorize and search your recipes with ease."),
+                createFeatureItem("2", "Meal Planning", "Plan your weekly meals and generate shopping lists."),
+                createFeatureItem("3", "Cook Mode", "Step-by-step cooking instructions with timers.")
         );
         
         rightPanel.getChildren().addAll(featureHeadingLabel, featuresBox);

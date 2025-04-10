@@ -12,8 +12,6 @@ import javafx.stage.Stage;
 import com.example.RecipeManagerApp;
 
 public class LoginSignupPage {
-    private final Color ORANGE_BG = Color.rgb(255, 159, 67);
-    private final Color LIGHT_ORANGE_BG = Color.rgb(255, 240, 230);
     private final Color DARK_GRAY = Color.rgb(51, 51, 51);
     private final Color WHITE = Color.rgb(255, 255, 255);
 

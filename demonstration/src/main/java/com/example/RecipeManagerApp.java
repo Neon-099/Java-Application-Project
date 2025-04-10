@@ -316,6 +316,10 @@ public class RecipeManagerApp extends Application {
         editButton.setStyle("-fx-background-color: transparent; -fx-padding: 2 5;");
         editButton.setFont(Font.font("Arial", 11));
         
+        Button deleteButton = new Button("🗑️ Delete");
+        deleteButton.setStyle("-fx-background-color: transparent; -fx-padding: 2 5;");
+        deleteButton.setFont(Font.font("Arial", 11));
+        
         Button planMealButton = new Button("📅 Plan");
         planMealButton.setStyle("-fx-background-color: transparent; -fx-padding: 2 5;");
         planMealButton.setFont(Font.font("Arial", 11));
@@ -323,11 +327,12 @@ public class RecipeManagerApp extends Application {
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
         
-        actions.getChildren().addAll(viewButton, editButton, planMealButton, spacer);
+        actions.getChildren().addAll(viewButton, editButton, deleteButton, planMealButton, spacer);
 
         // Add event handlers
         viewButton.setOnAction(event -> handleViewRecipe(recipeName));
         editButton.setOnAction(event -> handleEditRecipe(recipeName));
+        deleteButton.setOnAction(event -> handleDeleteRecipe(recipeName));
         planMealButton.setOnAction(event -> showMealPlanDialog(recipeName));
         
         recipeInfo.getChildren().addAll(nameLabel, metaInfo, actions);
@@ -1043,6 +1048,38 @@ public class RecipeManagerApp extends Application {
             
             // Refresh the recipe display
             refreshRecipeDisplay(recipeData);
+        });
+    }
+
+    private void handleDeleteRecipe(String recipeName) {
+        // Create confirmation dialog
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Delete Recipe");
+        alert.setHeaderText("Are you sure you want to delete this recipe?");
+        alert.setContentText("This action cannot be undone.");
+        
+        // Customize the buttons
+        ButtonType deleteButton = new ButtonType("Delete", ButtonBar.ButtonData.OK_DONE);
+        ButtonType cancelButton = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+        alert.getButtonTypes().setAll(deleteButton, cancelButton);
+        
+        // Show the dialog and handle the result
+        alert.showAndWait().ifPresent(buttonType -> {
+            if (buttonType == deleteButton) {
+                // Remove the recipe from the data map
+                recipeData.remove(recipeName);
+                
+                // Remove the recipe from any meal plans
+                for (List<Recipe> dayMeals : mealPlans.values()) {
+                    dayMeals.removeIf(r -> r.name.equals(recipeName));
+                }
+                
+                // Refresh the display
+                refreshRecipeDisplay(recipeData);
+                
+                // Show success message
+                showAlert("Recipe Deleted", "The recipe has been successfully deleted.");
+            }
         });
     }
 
