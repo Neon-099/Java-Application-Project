@@ -27,13 +27,13 @@ public class RecipeManagerApp extends Application {
     private BorderPane root;
     private VBox recipeContainer;
     
-    // Add this field to track last selected category
+    // TRACK LAST SELECTED CATEGORY
     private String lastSelectedCategory = "Main Dishes"; // default category
     
-    // Add a Hashmap to store recipe data
+    // HASHMAP TO STORE RECIPE DATA (WHEN ADDING NEW RECIPE)
     private Map<String, Recipe> recipeData = new HashMap<>();
     
-    // Add this field at the top of the class with other fields
+    // HASHMAP TO STORE MEAL PLANS
     private Map<String, List<Recipe>> mealPlans = new HashMap<>();
     
     @Override
@@ -312,6 +312,10 @@ public class RecipeManagerApp extends Application {
         viewButton.setStyle("-fx-background-color: transparent; -fx-padding: 2 5;");
         viewButton.setFont(Font.font("Arial", 11));
         
+        Button editButton = new Button("✏️ Edit");
+        editButton.setStyle("-fx-background-color: transparent; -fx-padding: 2 5;");
+        editButton.setFont(Font.font("Arial", 11));
+        
         Button planMealButton = new Button("📅 Plan");
         planMealButton.setStyle("-fx-background-color: transparent; -fx-padding: 2 5;");
         planMealButton.setFont(Font.font("Arial", 11));
@@ -319,10 +323,11 @@ public class RecipeManagerApp extends Application {
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
         
-        actions.getChildren().addAll(viewButton, planMealButton, spacer);
+        actions.getChildren().addAll(viewButton, editButton, planMealButton, spacer);
 
         // Add event handlers
         viewButton.setOnAction(event -> handleViewRecipe(recipeName));
+        editButton.setOnAction(event -> handleEditRecipe(recipeName));
         planMealButton.setOnAction(event -> showMealPlanDialog(recipeName));
         
         recipeInfo.getChildren().addAll(nameLabel, metaInfo, actions);
@@ -419,6 +424,7 @@ public class RecipeManagerApp extends Application {
     
     // Event handlers  (ADD NEW RECIPE BAR)
     private void handleAddRecipe() {
+        //ADD NEW RECIPE DIALOG
         Dialog<Recipe> dialog = new Dialog<>();
         dialog.setTitle("Add New Recipe");
         dialog.setHeaderText(null);
@@ -459,6 +465,7 @@ public class RecipeManagerApp extends Application {
 
         dialog.getDialogPane().setContent(grid);
 
+        // SET THE RESULT CONVERTER (RECIPE OBJECT)
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == saveButtonType) {
                 String categoryWithEmoji = getCategoryEmoji(lastSelectedCategory) + " " + lastSelectedCategory;
@@ -476,15 +483,15 @@ public class RecipeManagerApp extends Application {
 
         // Show the dialog and handle the result
         dialog.showAndWait().ifPresent(recipe -> {
-            // Add the recipe to the data map
+            // ADD THE RECIPE TO THE DATA HASHMAP
             recipeData.put(recipe.name, recipe);
             
-            // Find the section for the last selected category
+            // FIND THE SECTION FOR THE LAST SELECTED CATEGORY
             String sectionId = lastSelectedCategory.toLowerCase().replace(" ", "-");
             VBox categorySection = (VBox) recipeContainer.lookup("#" + sectionId);
             
             if (categorySection != null) {
-                // Find or create FlowPane for the category
+                // FIND OR CREATE FLOW PANE FOR THE CATEGORY
                 FlowPane flowPane = null;
                 for (Node node : categorySection.getChildren()) {
                     if (node instanceof FlowPane) {
@@ -500,7 +507,7 @@ public class RecipeManagerApp extends Application {
                     categorySection.getChildren().add(flowPane);
                 }
                 
-                // Create and add the new recipe card
+                // CREATE AND ADD THE NEW RECIPE CARD
                 VBox recipeCard = createRecipeCard(recipe.name, recipe.time, recipe.category);
                 recipeCard.setPrefWidth(300);
                 flowPane.getChildren().add(recipeCard);
@@ -517,6 +524,7 @@ public class RecipeManagerApp extends Application {
         });
     }
     
+    //SEARCH HANDLING
     private void handleSearch(String query) {
         if (query == null || query.trim().isEmpty()) {
             // If search is empty, show all recipes
@@ -524,21 +532,35 @@ public class RecipeManagerApp extends Application {
             return;
         }
         
-        // Convert query to lowercase for case-insensitive search
-        query = query.toLowerCase().trim();
+        // Convert query to lowercase and split into words
+        String[] searchWords = query.toLowerCase().trim().split("\\s+");
         
         // Create a map for filtered recipes
         Map<String, Recipe> filteredRecipes = new HashMap<>();
         
-        // Search through all recipes using contains() instead of regex matching
+        // Search through all recipes using exact word matching
         for (Recipe recipe : recipeData.values()) {
-            if (recipe.name.toLowerCase().contains(query) ||
-                recipe.ingredients.toLowerCase().contains(query) ||
-                recipe.instructions.toLowerCase().contains(query) ||
-                recipe.category.toLowerCase().contains(query) ||
-                recipe.time.toLowerCase().contains(query)) {
-                
-                filteredRecipes.put(recipe.name, recipe);
+            // Combine all recipe fields into one text
+            String recipeText = (recipe.name + " " + recipe.ingredients + " " + 
+                               recipe.instructions + " " + recipe.category + " " + 
+                               recipe.time).toLowerCase();
+            
+            // Split recipe text into words
+            String[] recipeWords = recipeText.split("\\s+");
+            
+            // Check if any of the search words match any recipe word
+            for (String searchWord : searchWords) {
+                boolean wordFound = false;
+                for (String recipeWord : recipeWords) {
+                    if (recipeWord.equals(searchWord)) {
+                        wordFound = true;
+                        break;
+                    }
+                }
+                if (wordFound) {
+                    filteredRecipes.put(recipe.name, recipe);
+                    break; // Found a match, no need to check other search words
+                }
             }
         }
         
@@ -951,6 +973,77 @@ public class RecipeManagerApp extends Application {
             }
         }
         return null;
+    }
+
+    private void handleEditRecipe(String recipeName) {
+        Recipe recipe = recipeData.get(recipeName);
+        if (recipe == null) return;
+
+        Dialog<Recipe> dialog = new Dialog<>();
+        dialog.setTitle("Edit Recipe");
+        dialog.setHeaderText(null);
+
+        ButtonType saveButtonType = new ButtonType("Save", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(saveButtonType, ButtonType.CANCEL);
+
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(20));
+
+        TextField nameField = new TextField(recipe.name);
+        TextField timeField = new TextField(recipe.time);
+        TextField imageUrlField = new TextField(recipe.imageUrl != null ? recipe.imageUrl : "");
+        TextArea ingredientsArea = new TextArea(recipe.ingredients);
+        TextArea instructionsArea = new TextArea(recipe.instructions);
+
+        ingredientsArea.setPrefRowCount(4);
+        instructionsArea.setPrefRowCount(4);
+
+        // Style headers
+        Label ingredientsHeader = new Label("Ingredients");
+        ingredientsHeader.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        Label instructionsHeader = new Label("Instructions");
+        instructionsHeader.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+
+        grid.add(new Label("Recipe Name:"), 0, 0);
+        grid.add(nameField, 1, 0);
+        grid.add(new Label("Cooking Time:"), 0, 1);
+        grid.add(timeField, 1, 1);
+        grid.add(new Label("Image URL (optional):"), 0, 2);
+        grid.add(imageUrlField, 1, 2);
+        grid.add(ingredientsHeader, 0, 3, 2, 1);
+        grid.add(ingredientsArea, 0, 4, 2, 1);
+        grid.add(instructionsHeader, 0, 5, 2, 1);
+        grid.add(instructionsArea, 0, 6, 2, 1);
+
+        dialog.getDialogPane().setContent(grid);
+
+        // Set the result converter
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == saveButtonType) {
+                return new Recipe(
+                    nameField.getText(),
+                    timeField.getText(),
+                    recipe.category, // Keep the same category
+                    ingredientsArea.getText(),
+                    instructionsArea.getText(),
+                    imageUrlField.getText().trim().isEmpty() ? null : imageUrlField.getText().trim()
+                );
+            }
+            return null;
+        });
+
+        // Show the dialog and handle the result
+        dialog.showAndWait().ifPresent(updatedRecipe -> {
+            // Remove the old recipe
+            recipeData.remove(recipeName);
+            // Add the updated recipe
+            recipeData.put(updatedRecipe.name, updatedRecipe);
+            
+            // Refresh the recipe display
+            refreshRecipeDisplay(recipeData);
+        });
     }
 
     public static void main(String[] args) {

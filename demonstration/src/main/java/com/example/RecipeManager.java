@@ -6,46 +6,50 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
-import javafx.scene.layout.Region;
-import com.example.RecipeManagerApp;
-import javafx.scene.image.Image;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundPosition;
-import javafx.scene.layout.BackgroundRepeat;
-import javafx.scene.layout.BackgroundSize;
+import javafx.scene.image.ImageView;
 
 public class RecipeManager extends Application {
 
+    // Colors
+    private static final Color ORANGE_BG = Color.rgb(255, 165, 0);
+    private static final Color LIGHT_ORANGE_BG = Color.rgb(255, 240, 230);
+    private static final Color DARK_GRAY = Color.rgb(51, 51, 51);
+    private static final Color LIGHT_GRAY = Color.rgb(245, 245, 245);
+    private static final Color WHITE = Color.rgb(255, 255, 255);
+    private static final Color DARK_TEXT = Color.rgb(51, 51, 51);
+    private static final Color MEDIUM_TEXT = Color.rgb(102, 102, 102);
+    private static final Color LIGHT_TEXT = Color.rgb(255, 255, 255);
+    private Stage primaryStage;
+
     @Override
     public void start(Stage primaryStage) {
+        this.primaryStage = primaryStage;
         // Main container
-        BorderPane root = new BorderPane();
-        root.setStyle("-fx-background-color: white;");
+        VBox root = new VBox();
+        root.setBackground(new Background(new BackgroundFill(LIGHT_GRAY, CornerRadii.EMPTY, Insets.EMPTY)));
         
-        // Header
+        // Add header
         HBox header = createHeader();
-        root.setTop(header);
         
-        // Content
-        ScrollPane scrollPane = new ScrollPane();
-        scrollPane.setFitToWidth(true);
-        scrollPane.setStyle("-fx-background-color: white;");
+        // Create content section
+        HBox contentSection = createContentSection();
         
-        VBox content = createContent();
-        scrollPane.setContent(content);
-        root.setCenter(scrollPane);
+        // Create footer
+        HBox footer = createFooter();
         
-        // Create the scene
-        Scene scene = new Scene(root, 1000, 700);
+        // Add all sections to root
+        root.getChildren().addAll(header, contentSection, footer);
+        
+        // Create scene
+        Scene scene = new Scene(root, 900, 600);
+        
+        // Set stage properties
         primaryStage.setTitle("Recipe Manager");
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -53,170 +57,202 @@ public class RecipeManager extends Application {
     
     private HBox createHeader() {
         HBox header = new HBox();
-        header.setPadding(new Insets(10));
-        header.setStyle("-fx-background-color: #FFA53F;");
+        header.setPrefHeight(70);
+        header.setBackground(new Background(new BackgroundFill(ORANGE_BG, CornerRadii.EMPTY, Insets.EMPTY)));
+        header.setPadding(new Insets(15, 20, 15, 20));
         header.setAlignment(Pos.CENTER_LEFT);
+        header.setSpacing(15);
         
-        // App icon and name
+        // Logo/Title
         HBox logoBox = new HBox(5);
-        
-        // Using text instead of image for simplicity
-        Label iconLabel = new Label("🍴");
-        iconLabel.setFont(Font.font("Arial", 18));
-        
-        Label appName = new Label("Recipe Manager");
-        appName.setFont(Font.font("Arial", FontWeight.BOLD, 16));
-        
-        logoBox.getChildren().addAll(iconLabel, appName);
         logoBox.setAlignment(Pos.CENTER_LEFT);
         
+        Label forkKnifeIcon = new Label("🍴");
+        forkKnifeIcon.setFont(Font.font("Arial", FontWeight.BOLD, 24));
+        forkKnifeIcon.setTextFill(DARK_TEXT);
         
-        // Add logo and menu to header
-        header.getChildren().addAll(logoBox);
-        header.setSpacing(100);
+        Label titleLabel = new Label("Recipe Manager");
+        titleLabel.setFont(Font.font("Arial", FontWeight.BOLD, 24));
+        titleLabel.setTextFill(DARK_TEXT);
+        
+        logoBox.getChildren().addAll(forkKnifeIcon, titleLabel);
+        
+        // Add buttons with spacers for alignment
+        Region spacer = new Region();
+        HBox.setHgrow(spacer, Priority.ALWAYS);
+        
+        // Login button
+        Button loginButton = new Button("Login");
+        loginButton.setPrefSize(100, 40);
+        loginButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        loginButton.setStyle(
+                "-fx-background-color: rgba(255, 255, 255, 0.3);" +
+                "-fx-text-fill: #333333;" +
+                "-fx-background-radius: 20;" +
+                "-fx-cursor: hand;"
+        );
+        
+        // Sign Up button
+        Button signUpButton = new Button("Sign Up");
+        signUpButton.setPrefSize(100, 40);
+        signUpButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        signUpButton.setStyle(
+                "-fx-background-color: #333333;" +
+                "-fx-text-fill: white;" +
+                "-fx-background-radius: 20;" +
+                "-fx-cursor: hand;"
+        );
+        
+        // Add event handlers for login and signup buttons
+        loginButton.setOnAction(event -> {
+            Stage loginStage = new Stage();
+            loginStage.initOwner(primaryStage); // Set the main window as owner
+            LoginSignupPage loginPage = new LoginSignupPage();
+            loginPage.showLoginPage(loginStage);
+        });
+        
+        signUpButton.setOnAction(event -> {
+            Stage signupStage = new Stage();
+            signupStage.initOwner(primaryStage); // Set the main window as owner
+            LoginSignupPage signupPage = new LoginSignupPage();
+            signupPage.showSignupPage(signupStage);
+        });
+        
+        header.getChildren().addAll(logoBox, spacer, loginButton, signUpButton);
         
         return header;
     }
     
-    private VBox createContent() {
-        VBox content = new VBox(20);
-        content.setPadding(new Insets(20));
-        content.setStyle("-fx-background-color: white;");
-        content.setAlignment(Pos.TOP_CENTER);
+    private HBox createContentSection() {
+        HBox contentSection = new HBox(20);
+        contentSection.setPadding(new Insets(20, 20, 20, 20));
+        contentSection.setAlignment(Pos.CENTER);
+        contentSection.setBackground(new Background(new BackgroundFill(LIGHT_GRAY, CornerRadii.EMPTY, Insets.EMPTY)));
         
-        // Title section
-        Label titleLabel = new Label("Your Personal Recipe Assistant");
-        titleLabel.setFont(Font.font("Arial", FontWeight.BOLD, 22));
-        titleLabel.setWrapText(true);
-        titleLabel.setTextAlignment(TextAlignment.CENTER);
-        titleLabel.setMaxWidth(260);
+        // Left panel - Kitchen Image and Text
+        VBox leftPanel = new VBox(20);
+        leftPanel.setAlignment(Pos.CENTER_LEFT);
+        leftPanel.setPadding(new Insets(30, 30, 30, 30));
+        leftPanel.setPrefWidth(450);
+        leftPanel.setBackground(new Background(new BackgroundFill(LIGHT_ORANGE_BG, new CornerRadii(10), Insets.EMPTY)));
         
-        Label subtitleLabel = new Label("Organize, create, and discover amazing recipes all in one place");
-        subtitleLabel.setFont(Font.font("Arial", 14));
-        subtitleLabel.setWrapText(true);
-        subtitleLabel.setTextAlignment(TextAlignment.CENTER);
-        subtitleLabel.setMaxWidth(260);
+        // Kitchen image placeholder
+        ImageView imageView = new ImageView("https://www.seriouseats.com/thmb/BBksd7FXnrkxFa8Dipf_LmgP9HA=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Filipino-Features-Hero-Final-2-b785e627967843b0aa631c6a977adabe.jpg");
+        imageView.setFitWidth(350);
+        imageView.setFitHeight(200);
         
-        // Start Button
-        Button startButton = new Button("Start here");
-        startButton.setFont(Font.font("Arial", FontWeight.BOLD, 16));
-        startButton.setStyle("-fx-background-color: #1a2639; -fx-text-fill: white;");
-        startButton.setPrefWidth(240);
-        startButton.setPrefHeight(40);
+        // Heading
+        Label headingLabel = new Label("Your Kitchen, Organized");
+        headingLabel.setFont(Font.font("Arial", FontWeight.BOLD, 30));
+        headingLabel.setTextFill(DARK_TEXT);
         
-        // Simplified button click handler
-        startButton.setOnAction(event -> {
-            // Close current window
-            Stage currentStage = (Stage) startButton.getScene().getWindow();
+        // Subheading
+        Label subheadingLabel = new Label("Save time planning meals and organizing your favorite recipes.");
+        subheadingLabel.setFont(Font.font("Arial", 16));
+        subheadingLabel.setTextFill(MEDIUM_TEXT);
+        subheadingLabel.setWrapText(true);
+        
+        // GET STARTED BUTTON
+        Button getStartedButton = new Button("Get Started");
+        getStartedButton.setPrefSize(180, 50);
+        getStartedButton.setFont(Font.font("Arial", FontWeight.BOLD, 18));
+        getStartedButton.setStyle(
+                "-fx-background-color: #FF9F43;" +
+                "-fx-text-fill: white;" +
+                "-fx-background-radius: 25;" +
+                "-fx-cursor: hand;"
+        );
+        
+        //FUNCTIONALITY / EVENT HANDLER 
+        getStartedButton.setOnAction(event -> {
+            //CLOSING THE CURRENT WINDOW
+            Stage currentStage = (Stage) getStartedButton.getScene().getWindow();
             currentStage.close();
-            
-            // Launch RecipeManagerApp
+
+            //LAUNCH THE RECIPE MANAGER APP
             RecipeManagerApp app = new RecipeManagerApp();
-            Stage newStage = new Stage();
-            app.start(newStage);
+            Stage newStage = new Stage ();
+            app.start(newStage); 
         });
+
+        // Add components to left panel
+        leftPanel.getChildren().addAll(imageView, headingLabel, subheadingLabel, getStartedButton);
         
-        // Features section with image background
-        VBox featuresSection = new VBox(20);
+        // Right panel - Why Choose Us
+        VBox rightPanel = new VBox(20);
+        rightPanel.setAlignment(Pos.TOP_LEFT);
+        rightPanel.setPadding(new Insets(30, 30, 30, 30));
+        rightPanel.setPrefWidth(450);
+        rightPanel.setBackground(new Background(new BackgroundFill(WHITE, new CornerRadii(10), Insets.EMPTY)));
         
-        try {
-            // Load the background image
-            Image backgroundImage = new Image("https://www.seriouseats.com/thmb/BBksd7FXnrkxFa8Dipf_LmgP9HA=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Filipino-Features-Hero-Final-2-b785e627967843b0aa631c6a977adabe.jpg");
-            
-            // Create BackgroundImage
-            BackgroundImage bImg = new BackgroundImage(
-                backgroundImage, 
-                BackgroundRepeat.NO_REPEAT, 
-                BackgroundRepeat.NO_REPEAT, 
-                BackgroundPosition.CENTER, 
-                new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, true)
-            );
-            
-            // Set the background
-            featuresSection.setBackground(new Background(bImg));
-        } catch (Exception e) {
-            // Fallback to a solid color if image fails to load
-            featuresSection.setStyle("-fx-background-color: beige brown;");
-            System.out.println("Failed to load background image: " + e.getMessage());
-        }
+        Label featureHeadingLabel = new Label("Key Features");
+        featureHeadingLabel.setFont(Font.font("Arial", FontWeight.BOLD, 30));
+        featureHeadingLabel.setTextFill(DARK_TEXT);
         
-        // Add a lighter overlay to see more of the image
-        VBox overlay = new VBox(20);
-        // Reduce opacity from 0.5 to 0.3 for more background visibility
-        overlay.setStyle("-fx-background-color: rgba(0, 0, 0, 0.3);");
-        overlay.setPadding(new Insets(40, 20, 40, 20));
-        overlay.setAlignment(Pos.TOP_CENTER);
-        
-        // Feature section title with light color for better visibility on dark background
-        Label featuresTitle = new Label("Key Features");
-        featuresTitle.setFont(Font.font("Arial", FontWeight.BOLD, 18));
-        featuresTitle.setPadding(new Insets(0, 0, 10, 0));
-        featuresTitle.setStyle("-fx-text-fill: white;");
-        
-        // Add features to overlay
-        overlay.getChildren().addAll(
-            featuresTitle,
-            createFeatureItem("📚", "Recipe Collection", "Save and organize your favorite recipes in one place"),
-            createFeatureItem("🕒", "Meal Planning", "Plan your weekly meals with ease")
+        // Features
+        VBox featuresBox = new VBox(20);
+        featuresBox.getChildren().addAll(
+                createFeatureItem("1", "Recipe Organization", "Categorize(add or edit) and search your recipes with ease."),
+                createFeatureItem("2", "Meal Planning", "Plan your weekly meals and generate shopping lists.")
         );
         
-        // Add overlay to features section
-        featuresSection.getChildren().add(overlay);
+        rightPanel.getChildren().addAll(featureHeadingLabel, featuresBox);
         
-        // Footer section with background
-        VBox footer = new VBox(10);
-        footer.setStyle("-fx-background-color: #1a2639;"); // Dark background
-        footer.setPadding(new Insets(20));
-        footer.setAlignment(Pos.CENTER);
-        footer.setMinWidth(Region.USE_PREF_SIZE); // Make footer stretch full width
+        contentSection.getChildren().addAll(leftPanel, rightPanel);
         
-        Label footerText = new Label("© 2025 RecipeKeeper. All rights reserved.");
-        footerText.setFont(Font.font("Arial", 12));
-        footerText.setStyle("-fx-text-fill: white;"); // White text
-        
-        footer.getChildren().add(footerText);
-        
-        // Add all sections to main content
-        content.getChildren().addAll(
-            titleLabel, 
-            subtitleLabel,
-            startButton,
-            featuresSection,
-            footer
-        );
-        
-        return content;
+        return contentSection;
     }
     
-    private VBox createFeatureItem(String icon, String title, String description) {
-        VBox featureBox = new VBox(5);
-        // Remove the white background, make it transparent with just a subtle border
-        featureBox.setStyle("-fx-background-color: transparent; -fx-border-color: rgba(255,255,255,0.3); -fx-border-radius: 5;");
-        featureBox.setPadding(new Insets(15));
-        featureBox.setPrefWidth(240);
+    private HBox createFeatureItem(String number, String title, String description) {
+        HBox featureItem = new HBox(15);
+        featureItem.setAlignment(Pos.CENTER_LEFT);
         
-        // Feature icon - make it white for visibility on the background image
-        Label iconLabel = new Label(icon);
-        iconLabel.setFont(Font.font("Arial", 24));
-        iconLabel.setStyle("-fx-text-fill: white;");
+        // Number circle
+        StackPane numberCircle = new StackPane();
+        Circle circle = new Circle(20, LIGHT_ORANGE_BG);
         
-        // Feature title and description - make text white for visibility
-        Label featureTitle = new Label(title);
-        featureTitle.setFont(Font.font("Arial", FontWeight.BOLD, 16));
-        featureTitle.setStyle("-fx-text-fill: white;");
+        Label numberLabel = new Label(number);
+        numberLabel.setFont(Font.font("Arial", FontWeight.BOLD, 18));
+        numberLabel.setTextFill(ORANGE_BG);
         
-        Label featureDescription = new Label(description);
-        featureDescription.setFont(Font.font("Arial", 14));
-        featureDescription.setStyle("-fx-text-fill: white;");
-        featureDescription.setWrapText(true);
+        numberCircle.getChildren().addAll(circle, numberLabel);
         
-        featureBox.getChildren().addAll(iconLabel, featureTitle, featureDescription);
+        // Feature text
+        VBox featureText = new VBox(5);
+        Label titleLabel = new Label(title);
+        titleLabel.setFont(Font.font("Arial", FontWeight.BOLD, 18));
+        titleLabel.setTextFill(DARK_TEXT);
         
-        return featureBox;
+        Label descLabel = new Label(description);
+        descLabel.setFont(Font.font("Arial", 14));
+        descLabel.setTextFill(MEDIUM_TEXT);
+        descLabel.setWrapText(true);
+        
+        featureText.getChildren().addAll(titleLabel, descLabel);
+        
+        featureItem.getChildren().addAll(numberCircle, featureText);
+        
+        return featureItem;
+    }
+    
+    private HBox createFooter() {
+        HBox footer = new HBox();
+        footer.setPrefHeight(40);
+        footer.setAlignment(Pos.CENTER);
+        footer.setBackground(new Background(new BackgroundFill(DARK_GRAY, CornerRadii.EMPTY, Insets.EMPTY)));
+        
+        Label copyrightLabel = new Label("© 2025 Recipe Manager");
+        copyrightLabel.setFont(Font.font("Arial", 12));
+        copyrightLabel.setTextFill(WHITE);
+        
+        footer.getChildren().add(copyrightLabel);
+        
+        return footer;
     }
 
-    
     public static void main(String[] args) {
         launch(args);
     }
 }
+
+    
